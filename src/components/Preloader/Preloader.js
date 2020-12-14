@@ -1,11 +1,10 @@
 import React from 'react';
 
-
 function Preloader() {
     return (
-        <body>
+        <div className="circle-preloader__conteiner">
             <i className="circle-preloader"></i>
-        </body>
+        </div>
     )
 }
 
