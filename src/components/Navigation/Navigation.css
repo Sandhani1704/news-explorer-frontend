@@ -1,0 +1,103 @@
+.header__nav {
+    display: flex;
+    margin-left: auto;
+    /* margin-right: 104px; */
+    /* padding: 0 min(104px, 7%); */
+    padding-right: min(104px, 7%);
+   }
+
+   @media screen and (max-width: 700px) {
+    .header__nav {
+        display: none;
+    }
+}
+  
+  .header__nav-list {
+    list-style-type: none;
+    display: flex;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header__nav-list-item {
+    display: flex;
+    margin-right: 32px;
+  }
+
+  @media screen and (max-width: 810px) {
+    .header__nav-list-item {
+        margin-right: 16px;
+    }
+}
+
+  .header__nav-button {
+    display: flex;
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 100px;
+    padding: 12px 18px;
+    margin: auto 0;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Roboto",Arial,sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+}
+  
+  /* .header__nav-list-item_is-active {
+    border-bottom: solid #fff 3px;
+  }
+  
+  .header__nav-list-item_is-active_black {
+    border-bottom-color: #1a1b22;
+  } */
+
+  .header__nav-link {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  .header__nav-list-item:nth-of-type(3n) {
+    margin-right: 0px;
+  }
+
+  @media screen and (max-width: 810px) {
+    .header__nav-link {
+      font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 810px) {
+    .header__nav-button {
+      font-size: 16px;
+    }
+}
+
+.header__nav-hamburger {
+    display: none;
+    background-image: url('../../images/burger-menu.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    margin: auto 0;
+    border: none;
+  }
+
+  @media screen and (max-width: 700px) {
+    .header__nav-hamburger {
+        display: block;
+        overflow: visible;
+    }
+}

@@ -1,18 +1,22 @@
 .header {
+    display: flex;
     width: 100%;
-    max-width: 1440px;
+    /* width: 1440px; */
     min-height: 80px;
+    /* padding: 0 min(104px, 7%); */
     background-color: rgba(196, 196, 196, 0.01);
     box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
 }
 
 .header__nav-logo {
+    padding-left: min(104px, 7%);
     font-family: "Roboto Slab", Arial, sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 1.25rem;
     line-height: 1.5rem;
     color: #fff;
-    margin: 30px auto 26px 0;
+    /* margin: 30px auto 26px 104px; */
+    margin: auto 0;
     text-decoration: none;
   }

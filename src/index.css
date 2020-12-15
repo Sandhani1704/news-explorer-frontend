@@ -1,8 +1,5 @@
 @import url('./vendor/normalize.css');
 @import url('./vendor/fonts/fonts.css');
-@import url('./components/App/App.css');
-@import url('./components/Preloader/Preloader.css');
-@import url('./components/Header/Header.css');
 
 body {
   margin: 0;
@@ -13,13 +10,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* #root {
+#root {
   min-height: 100vh;
+  /* max-width: 1440px; */
+  margin: 0 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
