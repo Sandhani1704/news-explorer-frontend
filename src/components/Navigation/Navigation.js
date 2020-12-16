@@ -7,12 +7,15 @@ function Navigation() {
 
     return (
         <nav className='header__nav'>
+            <button className={`header__nav-hamburger ${humburgerOpened && 'header__nav-hamburger_clicked'}`} onClick={() => {
+                setHumburgerOpened(true);
+            }}></button>
 
             <div className={`header__nav-conteiner ${humburgerOpened && 'header__nav-conteiner_opened'}`}>
                 <div className='header__nav-header'>
-                    <Link to='/' className='header__nav-logo'>
+                    {humburgerOpened && <Link to='/' className='header__nav-logo'>
                         NewsExplorer
-                    </Link>
+                    </Link>}
                     <button
                         className='header__nav-close'
                         onClick={() => {
@@ -38,9 +41,7 @@ function Navigation() {
                     </li>
                 </ul>
             </div>
-            <button className={`header__nav-hamburger ${humburgerOpened && 'header__nav-hamburger_clicked'}`} onClick={() => {
-                setHumburgerOpened(true);
-            }}></button>
+
 
 
         </nav>

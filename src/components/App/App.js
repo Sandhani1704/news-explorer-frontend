@@ -6,6 +6,7 @@ import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm'
 import AboutAuthor from '../AboutAuthor/AboutAuthor'
 import Footer from '../Footer/Footer'
+import PopupWithForm from '../PopupWithForm/PopupWithForm'
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <AboutAuthor />
             </Route>
             <Footer />
+            <PopupWithForm />
         </div>
     )
 }
