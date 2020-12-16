@@ -20,14 +20,16 @@ function Footer() {
                             Яндекс.Практикум
                         </a>
                     </li>
+                </ul>
+                <ul className='footer__social-list'>
                     <li className='footer__nav-list-item'>
                         <a href="https://www.facebook.com/NyushaGalkina" className='footer__link'>
-                            <img src={FacebookIcon} alt='Facebook' />
+                            <img className='footer__icon-image' src={FacebookIcon} alt='Facebook' />
                         </a>
                     </li>
                     <li className='footer__nav-list-item'>
                         <a href="https://github.com/Sandhani1704" className='footer__link'>
-                            <img src={GithubIcon} alt='Github' />
+                            <img className='footer__icon-image' src={GithubIcon} alt='Github' />
                         </a>
                     </li>
                 </ul>

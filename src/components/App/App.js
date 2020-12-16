@@ -9,10 +9,10 @@ import Footer from '../Footer/Footer'
 
 function App() {
     return (
-        <div className="app">
+        <div className='app'>
 
-            <Route exact path="/">
-                <div className="header-image">
+            <Route exact path='/'>
+                <div className='header-image'>
                     <Header />
                     <Preloader />
                     <SearchForm />
