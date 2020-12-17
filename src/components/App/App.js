@@ -6,18 +6,28 @@ import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm'
 import AboutAuthor from '../AboutAuthor/AboutAuthor'
 import Footer from '../Footer/Footer'
-import PopupWithForm from '../PopupWithForm/PopupWithForm'
+import SignupPopup from '../SignupPopup/SignupPopup'
+import SigninPopup from '../SigninPopup/SigninPopup'
+import InfoPopup from '../InfoPopup/InfoPopup'
 
 function App() {
 
     const [popupOpen, setIsPopupOpen] = React.useState(false);
+    const [popupSigninOpen, setIsSigninPopupOpen] = React.useState(false);
+    const [popupSignupOpen, setIsSignupPopupOpen] = React.useState(false);
+    const [popupInfoOpen, setIsPopupInfoOpen] = React.useState(false);
 
     function handleLoginPopupClick() {
-        setIsPopupOpen(true);
+        setIsPopupInfoOpen(true);
+        setIsSignupPopupOpen(true);
+        setIsSigninPopupOpen(true);
     }
 
     function closeAllPopups() {
         setIsPopupOpen(false);
+        setIsSignupPopupOpen(false);
+        setIsPopupInfoOpen(false);
+        setIsSigninPopupOpen(false);
     }
 
     React.useEffect(() => {
@@ -53,7 +63,9 @@ function App() {
                     <SearchForm />
                 </div>
                 <AboutAuthor />
-                <PopupWithForm isOpen={popupOpen} onClose={closeAllPopups} />
+                <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} buttonText='Зарегистрироваться' />
+                <InfoPopup isOpen={popupInfoOpen} onClose={closeAllPopups} />
+                <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} buttonText='Войти' />
             </Route>
             <Footer />
 

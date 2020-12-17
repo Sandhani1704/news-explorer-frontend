@@ -34,11 +34,11 @@ function Navigation({ onLogin }) {
                             Авторизоваться
                     </button>
                     </li>
-                    <li className='header__nav-list-item'>
+                    {/* <li className='header__nav-list-item'>
                         <Link className='header__nav-link' to='/saved-news'>
                             Сохраненные статьи
                     </Link>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
 

@@ -112,7 +112,7 @@
 	font-family: 'Inter', Arial, sans-serif;
 	font-size: 14px;
 	font-style: normal;
-	font-weight: 400;
+	font-weight: normal;
 	line-height: 17px;
 	border: none;
 	border-bottom: 1px solid rgb(0, 0, 0, 0.2);
@@ -168,4 +168,8 @@ line-height: 17px;
 	line-height: 17px;
 	text-decoration: none;
 	color: #2f71e5;
+}
+
+.popup-info__signin {
+	margin-left: 0;
 }
