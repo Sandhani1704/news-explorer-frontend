@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Navigation.css';
 import { Link } from 'react-router-dom';
 
-function Navigation() {
+function Navigation({ onLogin }) {
     const [humburgerOpened, setHumburgerOpened] = useState(false);
 
     return (
@@ -30,7 +30,7 @@ function Navigation() {
                     </Link>
                     </li>
                     <li className={`header__nav-list-item ${humburgerOpened && 'header__nav-list-item_is-active'}`}>
-                        <button className='header__nav-button' to='/'>
+                        <button onClick={onLogin} className='header__nav-button' to='/'>
                             Авторизоваться
                     </button>
                     </li>

@@ -2,7 +2,8 @@ import React from 'react';
 import './PopupWithForm.css';
 import { Link } from 'react-router-dom';
 
-function PopupWithForm({ name, title, children, isOpen, onClose }) {
+
+function SignupPopup({ isOpen, onClose }) {
 
     return (
         <section className={`popup ${isOpen && 'popup_opened'}`}>
@@ -18,7 +19,7 @@ function PopupWithForm({ name, title, children, isOpen, onClose }) {
                     <input className='popup__input' id='password' placeholder='Введите пароль' type='password' name='password' />
                     <span id='password-input-error' className='popup__input-error popup__input-error_active'></span>
                     <button type='submit' className='popup__button'>Войти</button>
-                    <p className='popup__signup'>или <Link to='signup' className='popup__signup-link'>Зарегистрироваться</Link></p>
+                    <p className='popup__signup'>или <Link to='signin' className='popup__signup-link'>Войти</Link></p>
                 </form>
             </div>
 
@@ -26,4 +27,4 @@ function PopupWithForm({ name, title, children, isOpen, onClose }) {
     )
 }
 
-export default PopupWithForm;
+export default SignupPopup;
