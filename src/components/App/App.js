@@ -9,6 +9,8 @@ import Footer from '../Footer/Footer'
 import SignupPopup from '../SignupPopup/SignupPopup'
 import SigninPopup from '../SigninPopup/SigninPopup'
 import InfoPopup from '../InfoPopup/InfoPopup'
+import SavedNews from '../SavedNews/SavedNews'
+import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader'
 
 function App() {
 
@@ -56,19 +58,26 @@ function App() {
     return (
         <div className='app'>
 
-            <Route exact path='/'>
-                <div className='header-image'>
+            <Switch>
+                <Route path="/saved-news">
                     <Header onLogin={handleLoginPopupClick} />
-                    <Preloader />
-                    <SearchForm />
-                </div>
-                <AboutAuthor />
-                <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} buttonText='Зарегистрироваться' />
-                <InfoPopup isOpen={popupInfoOpen} onClose={closeAllPopups} />
-                <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} buttonText='Войти' />
-            </Route>
-            <Footer />
+                    <SavedNewsHeader />
+                    <SavedNews />
+                </Route>
 
+                <Route exact path='/'>
+                    <div className='header-image'>
+                        <Header onLogin={handleLoginPopupClick} />
+                        <Preloader />
+                        <SearchForm />
+                    </div>
+                    <AboutAuthor />
+                    <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} buttonText='Зарегистрироваться' />
+                    <InfoPopup isOpen={popupInfoOpen} onClose={closeAllPopups} />
+                    <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} buttonText='Войти' />
+                </Route>
+                <Footer />
+            </Switch>
         </div>
     )
 }

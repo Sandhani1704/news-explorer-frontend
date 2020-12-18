@@ -44,6 +44,25 @@
     line-height: 24px;
 }
 
+.header__nav-button_black {
+  color: #1A1B22;
+  border: 1px solid #D1D2D6;
+  margin-left: 16px;
+}
+
+.header__nav-logout-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/logout.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 7px;
+}
+
+.header__nav-button_black {
+  color: #1A1B22;
+}
+
 @media screen and (max-width: 810px) {
   .header__nav-button {
     font-size: 16px;
@@ -72,6 +91,14 @@
     line-height: 24px;
   }
 
+  .header__nav-link_saved-news {
+    color: #1A1B22;
+  }
+
+  .header__nav-link_black {
+    color: #1A1B22;
+  }
+
   .header__nav-list-item:nth-of-type(3n) {
     margin-right: 0px;
   }
@@ -95,15 +122,19 @@
     border: none;
   }
 
+  .header__nav-hamburger_black {
+    background-image: url('../../images/burger-menu_black.png');
+  }
+
   .header__nav-hamburger_clicked {
     display: none;
   }
 
-  .header__nav-conteiner {
+  /* .header__nav-conteiner {
     display: flex;
     width: 100%;
    
-}
+} */
 
 .header__nav-header {
   display: none;
@@ -128,6 +159,7 @@
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 2;
       
   }
   
@@ -190,4 +222,7 @@
     border-bottom-color: #1a1b22;
   }
 
+  /* .header__nav-link_saved-news {
+    color: #1A1B22;
+  } */
   
