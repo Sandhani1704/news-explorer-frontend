@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import '../Header/Header.css';
-import Navigation from '../Navigation/Navigation';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import './SavedNewsHeader.css';
 
 function SavedNewsHeader({ onLogin }) {
 
     return (
-        // <header className="header">
-        //     <Link to="/" className="header__nav-logo header__nav-logo_saved-news">NewsExplorer</Link>
-        //     <Navigation onLogin={onLogin} />
-        // </header>
-        <></>
+        <section className='saved-news'>
+            <h2 className='saved-news__title'>Сохранённые статьи</h2>
+            <p className='saved-news__subtitle'>Грета, у вас 5 сохранённых статей</p>
+            <p className='saved-news__keywords'>По ключевым словам:
+            <span className='saved-news__span'> Природа, Тайга</span> и <span className='saved-news__span'>2-м другим</span></p>
+
+        </section>
     )
 }
 

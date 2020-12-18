@@ -11,6 +11,7 @@ import SigninPopup from '../SigninPopup/SigninPopup'
 import InfoPopup from '../InfoPopup/InfoPopup'
 import SavedNews from '../SavedNews/SavedNews'
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader'
+import Main from '../Main/Main'
 
 function App() {
 
@@ -63,20 +64,22 @@ function App() {
                     <Header onLogin={handleLoginPopupClick} />
                     <SavedNewsHeader />
                     <SavedNews />
+                    <Footer />
                 </Route>
 
                 <Route exact path='/'>
                     <div className='header-image'>
                         <Header onLogin={handleLoginPopupClick} />
-                        <Preloader />
                         <SearchForm />
                     </div>
+                    <Main />
                     <AboutAuthor />
                     <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} buttonText='Зарегистрироваться' />
                     <InfoPopup isOpen={popupInfoOpen} onClose={closeAllPopups} />
                     <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} buttonText='Войти' />
+                    <Footer />
                 </Route>
-                <Footer />
+
             </Switch>
         </div>
     )
