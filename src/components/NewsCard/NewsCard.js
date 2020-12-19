@@ -1,25 +1,28 @@
 import React from 'react';
 
 import './NewsCard.css'
-import imageCard from '../../images/card-image.png';
+// import imageCard from '../../images/card-image.png';
+import { useLocation } from 'react-router-dom';
 
-function NewsCard() {
+function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source }) {
+    const location = useLocation();
 
     return (
         <div className='news-card'>
             <div className='news-card__content-container'>
                 <div className='news-card__image-container'>
-                    <button type='button' className='news-card__delete-button'></button>
-                    <div class='news-card__tag'>Яблоко</div>
-                    <img className='news-card__image' src={imageCard} alt='' />
+                    {location.pathname === '/saved-news' && <button type='button' className='news-card__delete-button'></button>}
+                    {location.pathname === '/' && <button type='button' className='news-card__save-button'>
+                        <span className='news-card__button-tooltip'>Войдите, чтобы сохранять статьи</span>
+                    </button>}
+                    <div class='news-card__tag'>{tagTitle}</div>
+                    <img className='news-card__image' src={imageLink} alt={imageAlt} />
                 </div>
-                <time className='news-card__date'>17 декабря, 2020</time>
-                <h3 className='news-card__title'>Лесные огоньки: история одной фотографии</h3>
-                <p className='news-card__description'>Фотограф отвлеклась от освещения суровой
-                политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного
-                из местных чудес природы.</p>
+                <time className='news-card__date'>{date}</time>
+                <h3 className='news-card__title'>{title}</h3>
+                <p className='news-card__description'>{description}</p>
             </div>
-            <p className='news-card__source'>Афиша</p>
+            <p className='news-card__source'>{source}</p>
         </div>
     )
 

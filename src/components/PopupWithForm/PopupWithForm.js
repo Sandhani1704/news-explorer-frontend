@@ -9,7 +9,7 @@ function PopupWithForm({ name, title, children, isOpen, onClose }) {
             <div className='popup__container'>
                 <button type='button' className='popup__button-close-icon' onClick={onClose}></button>
                 <h3 className='popup__title'>{title}</h3>
-                <form className='popup__form' name='popup-form'>
+                <form className='popup__form' name={name}>
                     {children}
                 </form>
             </div>

@@ -34,7 +34,7 @@ function Navigation({ onLogin }) {
                         </Link>
                     </li>
                     <li className={`header__nav-list-item ${humburgerOpened && 'header__nav-list-item_is-active'}`}>
-                        {location.pathname === '/' && <button onClick={onLogin} className='header__nav-button' to='/'>
+                        {location.pathname === '/' && <button onClick={onLogin} className='header__nav-button'>
                             Авторизоваться
                       </button>}
                     </li>
