@@ -95,7 +95,6 @@ function App() {
                     </div>
                     <Main />
                     <AboutAuthor />
-                    {/* <SigninPopup isOpen={popupSigninOpen} onSignup={handleSignupPopupClick} onClose={closeAllPopups} buttonText='Войти' /> */}
                     <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} onSignup={handleSignupPopupClick} onSubmit={handleLoginSubmit} buttonText='Войти' />
                     <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} onSubmit={handleRegisterSubmit} buttonText='Зарегистрироваться' />
                     <InfoPopup isOpen={popupInfoOpen} onSignin={handleSigninPopupClick} onClose={closeAllPopups} />

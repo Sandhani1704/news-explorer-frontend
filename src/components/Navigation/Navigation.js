@@ -27,29 +27,21 @@ function Navigation({ onLogin, loggedIn }) {
                     ></button>
                 </div>
                 <ul className={`header__nav-list ${humburgerOpened && 'header__nav-list_opened'}`}>
-                    <li className='header__nav-list-item'>
-                        {/* <Link className={`header__nav-link ${!humburgerOpened && 'header__nav-link_black'}`} to='/'> */}
+                    <li className={`header__nav-list-item ${location.pathname === '/' && 'header__nav-list-item_active'}`}>
                         <Link className={`header__nav-link ${location.pathname === '/saved-news' && 'header__nav-link_black'}`} to='/'>
                             Главная
                         </Link>
                     </li>
-                    <li className={`header__nav-list-item ${humburgerOpened && 'header__nav-list-item_is-active'}`}>
-                        {/* {location.pathname === '/' && <button onClick={onLogin} className='header__nav-button'> */}
+                    <li className={`header__nav-list-item ${location.pathname === '/saved-news' && 'header__nav-list-item_active_black'}`}>
                         {!loggedIn ? <button onClick={onLogin} className='header__nav-button'>
                             Авторизоваться
                       </button> : <Link className={`header__nav-link ${location.pathname === '/saved-news' && 'header__nav-link_black'}`} to='/saved-news'>
                                 Сохраненные статьи
                         </Link>}
                     </li>
-                    {/* {location.pathname === '/saved-news' && <li className='header__nav-list-item'> */}
-                    {/* <li className='header__nav-list-item'>
-                        <Link className='header__nav-link header__nav-link_black' to='/saved-news'>
-                            Сохраненные статьи
-                        </Link>
-                    </li> */}
-                    <li className={`header__nav-list-item ${humburgerOpened && 'header__nav-list-item_is-active'}`}>
 
-                        {/* {location.pathname === '/saved-news' && <button onClick={onLogin} className='header__nav-button header__nav-button_black' to='/'> */}
+                    {/* <li className={`header__nav-list-item ${humburgerOpened && 'header__nav-list-item_is-active'}`}> */}
+                    <li className='header__nav-list-item'>
                         {loggedIn && <button onClick={onLogin} className={`header__nav-button ${location.pathname === '/saved-news' && 'header__nav-button_black'}`} to='/'>
                             Грета
                             <i className={`header__nav-logout-icon ${location.pathname === '/saved-news' && 'header__nav-logout-icon_black'}`}></i>
