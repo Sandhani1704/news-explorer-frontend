@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Navigation.css';
 import { Link, useLocation } from 'react-router-dom';
 
-function Navigation({ onLogin }) {
+function Navigation({ onLogin, loggedIn }) {
     const [humburgerOpened, setHumburgerOpened] = useState(false);
     const location = useLocation();
 
@@ -34,23 +34,25 @@ function Navigation({ onLogin }) {
                         </Link>
                     </li>
                     <li className={`header__nav-list-item ${humburgerOpened && 'header__nav-list-item_is-active'}`}>
-                        {location.pathname === '/' && <button onClick={onLogin} className='header__nav-button'>
+                        {/* {location.pathname === '/' && <button onClick={onLogin} className='header__nav-button'> */}
+                        {!loggedIn ? <button onClick={onLogin} className='header__nav-button'>
                             Авторизоваться
-                      </button>}
+                      </button> : <Link className={`header__nav-link ${location.pathname === '/saved-news' && 'header__nav-link_black'}`} to='/saved-news'>
+                                Сохраненные статьи
+                        </Link>}
                     </li>
-                    {location.pathname === '/saved-news' && <li className='header__nav-list-item'>
-                        {/* <Link className={`header__nav-link ${!humburgerOpened && 'header__nav-link_black'}`} to='/saved-news'> */}
+                    {/* {location.pathname === '/saved-news' && <li className='header__nav-list-item'> */}
+                    {/* <li className='header__nav-list-item'>
                         <Link className='header__nav-link header__nav-link_black' to='/saved-news'>
                             Сохраненные статьи
                         </Link>
-                    </li>}
+                    </li> */}
                     <li className={`header__nav-list-item ${humburgerOpened && 'header__nav-list-item_is-active'}`}>
-                        {/* {location.pathname === '/saved-news' && <button onClick={onLogin} className={`header__nav-button ${!humburgerOpened && 'header__nav-button_black'}`} to='/'> */}
-                        {location.pathname === '/saved-news' && <button onClick={onLogin} className='header__nav-button header__nav-button_black' to='/'>
+
+                        {/* {location.pathname === '/saved-news' && <button onClick={onLogin} className='header__nav-button header__nav-button_black' to='/'> */}
+                        {loggedIn && <button onClick={onLogin} className={`header__nav-button ${location.pathname === '/saved-news' && 'header__nav-button_black'}`} to='/'>
                             Грета
-                            {/* <i className={`header__nav-logout-icon ${location.pathname === '/saved-news' && 'header__nav-logout-icon'} ${humburgerOpened && 'header__nav-logout-icon_black'}`}></i> */}
-                            {/* <i className={`header__nav-logout-icon ${location.pathname === '/saved-news' && 'header__nav-logout-icon_black'}`}></i> */}
-                            <i className='header__nav-logout-icon header__nav-logout-icon_black'></i>
+                            <i className={`header__nav-logout-icon ${location.pathname === '/saved-news' && 'header__nav-logout-icon_black'}`}></i>
                         </button>}
                     </li>
                 </ul>

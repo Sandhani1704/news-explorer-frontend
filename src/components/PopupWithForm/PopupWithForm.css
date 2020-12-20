@@ -62,7 +62,6 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: transparent;
-	/* background-color: black; */
 	background-size: cover;
 	border: 0;
 	cursor: pointer;
@@ -71,6 +70,11 @@
 .popup__button-close-icon:hover {
 	opacity: 0.6;
 }
+
+.popup__button-close-icon:focus {
+	outline: none;
+}
+
 
 @media screen and (max-width: 320px) {
 	.popup__button-close-icon {
@@ -117,13 +121,13 @@
 	border: none;
 	border-bottom: 1px solid rgb(0, 0, 0, 0.2);
 	padding: 10px 0;
-	color: #E6E8EB;
-	/* margin-top: 31px; */
+	/* color: #E6E8EB; */
+	color: #000000;
 }
 
 .popup__input-error {
 padding: 0;
-font-family: Inter;
+font-family: 'Inter', Arial, sans-serif;
 font-style: normal;
 font-weight: normal;
 font-size: 14px;
@@ -149,7 +153,20 @@ line-height: 17px;
 	border-radius: 100px;
 }
 
-.popup__signup {
+.popup__button:focus {
+	outline: none;
+  }
+
+.popup__button:disabled {
+	background-color: #e6e8eb;
+	color: #b6bcbf;
+  }
+
+.popup__button:hover:enabled {
+	background-color: #347eff;
+}
+
+.popup__choice {
   margin: 16px auto 0;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
@@ -160,7 +177,7 @@ line-height: 17px;
   text-align: center;
 }
 
-.popup__signup-link {
+.popup__button-link {
 	font-family: 'Inter', Arial, sans-serif;
 	font-size: 14px;
 	font-style: normal;
@@ -168,8 +185,15 @@ line-height: 17px;
 	line-height: 17px;
 	text-decoration: none;
 	color: #2f71e5;
+	background-color: inherit;
+	border: none;
+	cursor: pointer;
 }
 
-.popup-info__signin {
+.popup__button-link:focus {
+	outline: none;
+}
+
+.popup-info__choice {
 	margin-left: 0;
 }

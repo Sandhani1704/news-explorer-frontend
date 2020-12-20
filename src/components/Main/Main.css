@@ -31,6 +31,10 @@ margin: 64px auto 0;
 border: none;
 }
 
+.main__showmore-button:focus {
+  outline: none;
+}
+
 .main__showmore-button:hover {
     background-color: rgb(255, 255, 255, 0.9);
   }

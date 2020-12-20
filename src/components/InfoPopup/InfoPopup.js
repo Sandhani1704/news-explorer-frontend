@@ -1,9 +1,8 @@
 import React from 'react';
 import '../PopupWithForm/PopupWithForm.css';
-import { Link } from 'react-router-dom';
 import PopupWithForm from '../PopupWithForm/PopupWithForm'
 
-function InfoPopup({ isOpen, onClose }) {
+function InfoPopup({ isOpen, onClose, onSignin }) {
 
     return (
         <PopupWithForm
@@ -20,7 +19,7 @@ function InfoPopup({ isOpen, onClose }) {
                 <span id='password-input-error' className='popup__input-error popup__input-error_active'></span>
                 
             </form> */}
-            <p className='popup__signup popup-info__signin'><Link to='signin' className='popup__signup-link'>Войти</Link></p>
+            <p className='popup__choice popup-info__choice'><button type='button' onClick={onSignin} className='popup__button-link'>Войти</button></p>
 
         </PopupWithForm>
     )

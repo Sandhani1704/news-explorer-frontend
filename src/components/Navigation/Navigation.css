@@ -54,10 +54,14 @@
 .header__nav-logout-icon {
   width: 24px;
   height: 24px;
-  background-image: url('../../images/logout.png');
+  background-image: url('../../images/logout-white.png');
   background-position: center;
   background-repeat: no-repeat;
   margin-left: 7px;
+}
+
+.header__nav-logout-icon_black {
+  background-image: url('../../images/logout.png');
 }
 
 .header__nav-button_black {
@@ -87,12 +91,12 @@
     color: #1A1B22;
   }
 
-  .header__nav-list-item:nth-of-type(2n) {
-    margin-right: 0px;
-  }
-  /* .header__nav-list-item:last-of-type {
+  /* .header__nav-list-item:nth-of-type(2n) {
     margin-right: 0px;
   } */
+  .header__nav-list-item:last-of-type {
+    margin-right: 0px;
+  }
 
   @media screen and (max-width: 810px) {
     .header__nav-link {

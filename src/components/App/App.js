@@ -19,13 +19,11 @@ function App() {
     const [popupSigninOpen, setIsSigninPopupOpen] = React.useState(false);
     const [popupSignupOpen, setIsSignupPopupOpen] = React.useState(false);
     const [popupInfoOpen, setIsPopupInfoOpen] = React.useState(false);
+    const [loggedIn, setloggedIn] = React.useState(false);
 
     function handleLoginPopupClick() {
-        setIsPopupInfoOpen(true);
         setIsSigninPopupOpen(true);
     }
-
-
 
     function closeAllPopups() {
         // setIsPopupOpen(false);
@@ -42,37 +40,49 @@ function App() {
     function handleSigninPopupClick() {
         setIsSignupPopupOpen(false);
         setIsSigninPopupOpen(true);
+        setIsPopupInfoOpen(false);
     }
 
-    // React.useEffect(() => {
-    //     function handleEscClose(evt) {
-    //         if (evt.key === 'Escape') {
-    //             closeAllPopups();
-    //         }
-    //     }
+    function handleRegisterSubmit(evt) {
+        evt.preventDefault();
+        setIsPopupInfoOpen(true);
+        setIsSignupPopupOpen(false)
+    }
 
-    //     // function closeByOverlayClick(evt) {
-    //     //     if (evt.target.classList.contains('popup_opened')) {
-    //     //         closeAllPopups();
-    //     //     }
-    //     // }
-    //     // const popup = document.querySelector('.popup')
-    //     document.addEventListener('keydown', handleEscClose);
-    //     // popup.querySelector('.popup__overlay').addEventListener('click', closeByOverlayClick);
-    //     // document.addEventListener('click', closeByOverlayClick);
+    function handleLoginSubmit(evt) {
+        evt.preventDefault();
+        setIsSigninPopupOpen(false);
+        setloggedIn(true);
+    }
 
-    //     return () => {
-    //         document.removeEventListener('keydown', handleEscClose);
-    //         // document.removeEventListener('click', closeByOverlayClick);
-    //     };
-    // });
+    React.useEffect(() => {
+        function handleEscClose(evt) {
+            if (evt.key === 'Escape') {
+                closeAllPopups();
+            }
+        }
+
+        function closeByOverlayClick(evt) {
+            if (evt.target.classList.contains('popup__overlay')) {
+                closeAllPopups();
+            }
+        }
+
+        document.addEventListener('keydown', handleEscClose);
+        document.addEventListener('click', closeByOverlayClick);
+
+        return () => {
+            document.removeEventListener('keydown', handleEscClose);
+            document.removeEventListener('click', closeByOverlayClick);
+        };
+    });
 
     return (
         <div className='app'>
 
             <Switch>
                 <Route path="/saved-news">
-                    <Header onLogin={handleLoginPopupClick} />
+                    <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} />
                     <SavedNewsHeader />
                     <SavedNews />
                     <Footer />
@@ -80,15 +90,15 @@ function App() {
 
                 <Route path='/'>
                     <div className='header-image'>
-                        <Header onLogin={handleLoginPopupClick} />
+                        <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} />
                         <SearchForm />
                     </div>
                     <Main />
                     <AboutAuthor />
                     {/* <SigninPopup isOpen={popupSigninOpen} onSignup={handleSignupPopupClick} onClose={closeAllPopups} buttonText='Войти' /> */}
-                    <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} onSignup={handleSignupPopupClick} buttonText='Войти' />
-                    <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} buttonText='Зарегистрироваться' />
-                    {/* <InfoPopup isOpen={popupInfoOpen} onClose={closeAllPopups} /> */}
+                    <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} onSignup={handleSignupPopupClick} onSubmit={handleLoginSubmit} buttonText='Войти' />
+                    <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} onSubmit={handleRegisterSubmit} buttonText='Зарегистрироваться' />
+                    <InfoPopup isOpen={popupInfoOpen} onSignin={handleSigninPopupClick} onClose={closeAllPopups} />
                     <Footer />
                 </Route>
 
