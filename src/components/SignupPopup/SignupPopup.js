@@ -80,8 +80,6 @@ function SignupPopup({ isOpen, onClose, buttonText, onSignin, onSubmit }) {
             <span id='password-input-error' className={`popup__input-error ${!isValid.name && 'popup__input-error_active'}`}>{validationMessage.name}</span>
             <button type='submit' className={`popup__button ${!isSubmitDisabled && 'popup__button_inactive'}`} disabled={!isSubmitDisabled}>{buttonText}</button>
             <p className='popup__choice'>или <button type='button' className='popup__button-link' onClick={onSignin}>Войти</button></p>
-
-
         </PopupWithForm>
     )
 }

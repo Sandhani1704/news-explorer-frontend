@@ -1,7 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
-import Preloader from '../Preloader/Preloader'
+import { Route, Switch } from 'react-router-dom';
 import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm'
 import AboutAuthor from '../AboutAuthor/AboutAuthor'
@@ -15,7 +14,6 @@ import Main from '../Main/Main'
 
 function App() {
 
-    // const [popupOpen, setIsPopupOpen] = React.useState(false);
     const [popupSigninOpen, setIsSigninPopupOpen] = React.useState(false);
     const [popupSignupOpen, setIsSignupPopupOpen] = React.useState(false);
     const [popupInfoOpen, setIsPopupInfoOpen] = React.useState(false);
@@ -26,7 +24,6 @@ function App() {
     }
 
     function closeAllPopups() {
-        // setIsPopupOpen(false);
         setIsSignupPopupOpen(false);
         setIsPopupInfoOpen(false);
         setIsSigninPopupOpen(false);

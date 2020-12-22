@@ -2,15 +2,14 @@
 	display: flex;
 	visibility: hidden;
 	position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	display: flex;
-    align-items: center;
+	align-items: center;
 	justify-content: center;
 	transition: visibility .7s, opacity .7s;
-    
 }
 
 .popup_opened {
@@ -19,10 +18,10 @@
 
 .popup__overlay {
 	position: fixed;
-    width: 100%;
-    height: 100%;
-    background:rgba(0,0,0,.5);
-    cursor: pointer;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .5);
+	cursor: pointer;
 }
 
 .popup__container {
@@ -75,7 +74,6 @@
 	outline: none;
 }
 
-
 @media screen and (max-width: 320px) {
 	.popup__button-close-icon {
 		width: 30px;
@@ -102,14 +100,14 @@
 }
 
 .popup__label {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 15px;
-  color: #2f71e5;
-  margin-top: 22px;
-  padding: 0;
+	font-family: 'Inter', Arial, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 15px;
+	color: #2f71e5;
+	margin-top: 22px;
+	padding: 0;
 }
 
 .popup__input {
@@ -121,24 +119,12 @@
 	border: none;
 	border-bottom: 1px solid rgb(0, 0, 0, 0.2);
 	padding: 10px 0;
-	/* color: #E6E8EB; */
 	color: #000000;
 }
 
 .popup__input:focus {
 	outline: none;
-  }
-
-/* .popup__input-error {
-padding: 0;
-font-family: 'Inter', Arial, sans-serif;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 17px;
-
-
-} */
+}
 
 .popup__input-error {
 	margin-top: 5px;
@@ -149,11 +135,11 @@ line-height: 17px;
 	height: 15px;
 	line-height: 15px;
 	color: #FF0000;
-  }
+}
 
-  .popup__input-error_active {
+.popup__input-error_active {
 	visibility: visible;
-  }
+}
 
 .popup__button {
 	margin-top: 39px;
@@ -174,12 +160,13 @@ line-height: 17px;
 
 .popup__button_inactive {
 	background-color: #e6e8eb;
-	color: #b6bcbf;	
+	color: #b6bcbf;
 }
 
 .popup__button:focus {
 	outline: none;
-  }
+}
+
 
 /* .popup__button:disabled {
 	background-color: #e6e8eb;
@@ -191,14 +178,14 @@ line-height: 17px;
 }
 
 .popup__choice {
-  margin: 16px auto 0;
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 17px;
-  color: #000000;
-  text-align: center;
+	margin: 16px auto 0;
+	font-family: 'Inter', Arial, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 17px;
+	color: #000000;
+	text-align: center;
 }
 
 .popup__button-link {

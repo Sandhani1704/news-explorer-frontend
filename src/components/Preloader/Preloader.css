@@ -1,5 +1,6 @@
 .circle-preloader__conteiner {
 	margin: 0;
+	visibility: hidden;
 }
 
 .circle-preloader {
