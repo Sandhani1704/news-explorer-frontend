@@ -1,7 +1,5 @@
 import React from 'react';
-
 import './NewsCard.css'
-// import imageCard from '../../images/card-image.png';
 import { useLocation } from 'react-router-dom';
 
 function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source }) {

@@ -1,8 +1,8 @@
 import React from 'react';
-import './AboutAuthor.css';
+import './About.css';
 import aboutAvatar from '../../images/avatar.png'
 
-function AboutAuthor() {
+function About() {
     return (
         <section className='about'>
             <div className='about__avatar-conteiner'>
@@ -20,4 +20,4 @@ function AboutAuthor() {
     )
 }
 
-export default AboutAuthor
+export default About

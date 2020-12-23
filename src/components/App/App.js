@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm'
-import AboutAuthor from '../AboutAuthor/AboutAuthor'
+import About from '../About/About'
 import Footer from '../Footer/Footer'
 import SigninPopup from '../SigninPopup/SigninPopup'
 import SignupPopup from '../SignupPopup/SignupPopup'
@@ -91,7 +91,7 @@ function App() {
                         <SearchForm />
                     </div>
                     <Main />
-                    <AboutAuthor />
+                    <About />
                     <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} onSignup={handleSignupPopupClick} onSubmit={handleLoginSubmit} buttonText='Войти' />
                     <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} onSubmit={handleRegisterSubmit} buttonText='Зарегистрироваться' />
                     <InfoPopup isOpen={popupInfoOpen} onSignin={handleSigninPopupClick} onClose={closeAllPopups} />

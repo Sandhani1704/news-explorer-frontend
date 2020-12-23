@@ -79,12 +79,6 @@
 	color: #1A1B22;
 }
 
-@media screen and (max-width: 810px) {
-	.header__nav-button {
-		font-size: 16px;
-	}
-}
-
 .header__nav-link {
 	margin-top: auto;
 	margin-bottom: auto;
@@ -105,8 +99,11 @@
 	margin-right: 0px;
 }
 
-@media screen and (max-width: 810px) {
+@media screen and (max-width: 768px) {
 	.header__nav-link {
+		font-size: 16px;
+	}
+	.header__nav-button {
 		font-size: 16px;
 	}
 }

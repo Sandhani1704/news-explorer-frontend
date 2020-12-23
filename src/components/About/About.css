@@ -3,6 +3,12 @@
     padding: 80px min(104px, 7%);
 }
 
+@media screen and (max-width: 768px) {
+.about {
+    padding: 40px min(40px, 7%);
+}
+}
+
 @media screen and (max-width: 600px) {
     .about {
         flex-direction: column;
@@ -33,8 +39,16 @@
     margin-left: 56px;
 }
 
+@media screen and (max-width: 768px) {
+    .about__text-conteiner {
+        margin-left: 32px;
+        width: min(424px, 60%);
+    }
+}
+
 @media screen and (max-width: 600px) {
     .about__text-conteiner {
+        max-width: 100%;
         width: 100%;
         margin-left: 0;
     }
@@ -58,7 +72,7 @@
 }
 
 .about__description {
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;

@@ -40,7 +40,6 @@ function Navigation({ onLogin, loggedIn }) {
                         </Link>}
                     </li>
 
-                    {/* <li className={`header__nav-list-item ${humburgerOpened && 'header__nav-list-item_is-active'}`}> */}
                     <li className='header__nav-list-item'>
                         {loggedIn && <button onClick={onLogin} className={`header__nav-button ${location.pathname === '/saved-news' && 'header__nav-button_black'}`} to='/'>
                             Грета
@@ -49,9 +48,6 @@ function Navigation({ onLogin, loggedIn }) {
                     </li>
                 </ul>
             </div>
-
-
-
         </nav>
     )
 }
