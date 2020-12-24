@@ -10,9 +10,9 @@ function SearchForm() {
             <p className='search-form__description'>
                 Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.
                 </p>
-            <div class='search-form__input-container'>
-                <input class='search-form__input' placeholder='Введите тему новости' name='search-text' required />
-                <button type='submit' class='search-form__button-find'>Искать</button>
+            <div className='search-form__input-container'>
+                <input className='search-form__input' placeholder='Введите тему новости' name='search-text' required />
+                <button type='submit' className='search-form__button-find'>Искать</button>
             </div>
         </form>
 

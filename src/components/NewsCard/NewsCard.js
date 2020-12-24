@@ -13,7 +13,7 @@ function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, sou
                     {location.pathname === '/' && <button type='button' className='news-card__save-button'>
                         <span className='news-card__button-tooltip'>Войдите, чтобы сохранять статьи</span>
                     </button>}
-                    <div class='news-card__tag'>{tagTitle}</div>
+                    <div className='news-card__tag'>{tagTitle}</div>
                     <img className='news-card__image' src={imageLink} alt={imageAlt} />
                 </div>
                 <time className='news-card__date'>{date}</time>

@@ -100,15 +100,8 @@
 	}
 }
 
-@media screen and (max-width: 482px) {
-	.search-form {
-		padding: 30px calc(50% - min(285px, 89%) / 2) 32px;
-	}
-	.search-form__title {
-		max-width: 285px;
-	}
+@media screen and (max-width: 660px) {
 	.search-form__input-container {
-		margin-top: 122px;
 		flex-direction: column;
 	}
 	.search-form__input {
@@ -119,5 +112,14 @@
 		width: 100%;
 		margin: 0;
 		margin-top: 16px;
+	}
+}
+
+@media screen and (max-width: 482px) {
+	.search-form {
+		padding: 30px calc(50% - min(285px, 89%) / 2) 32px;
+	}
+	.search-form__input-container {
+		margin-top: 122px;
 	}
 }
