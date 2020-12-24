@@ -36,25 +36,32 @@ function SigninPopup({ isOpen, onClose, buttonText, onSignup, onSubmit }) {
         })
     }
 
+    React.useEffect(() => {
+        setPassword('')
+        setEmail('')
+        setIsValidationMessage({ email: '', password: '' })
+        setIsValid({ email: false, password: false })
+    }, [isOpen]);
+
     const isSubmitDisabled = Object.values(isValid).every(Boolean)
 
 
     return (
         <PopupWithForm
             name='popup-signin'
-            title='Войти'
+            title='Вход'
             buttonText={buttonText}
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={onSubmit}>
             <label className='popup__label'>Email</label>
-            <input className='popup__input' onChange={handleInputEmailChange} value={email} id='email' type='email' name='email' placeholder='Введите почту'
+            <input className='popup__input' onChange={handleInputEmailChange} value={email} id='email-input' type='email' name='email' placeholder='Введите почту'
                 required
                 minLength='6'
                 maxLength='50' />
             <span id='email-input-error' className={`popup__input-error ${!isValid.name && 'popup__input-error_active'}`}>{validationMessage.email}</span>
             <label className='popup__label'>Пароль</label>
-            <input className='popup__input' onChange={handleInputPasswordChange} value={password} id='password' placeholder='Введите пароль' type='password' name='password'
+            <input className='popup__input' onChange={handleInputPasswordChange} value={password} id='password-input' placeholder='Введите пароль' type='password' name='password'
                 required
                 minLength='6'
                 maxLength='50' />

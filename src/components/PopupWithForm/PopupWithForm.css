@@ -9,7 +9,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: visibility .7s, opacity .7s;
+	transition: visibility 1s,opacity .5s linear;
+	/* transition: visibility .7s, opacity .7s; */
+	z-index: 2;
 }
 
 .popup_opened {
@@ -35,10 +37,9 @@
 	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
 	border-radius: 10px;
 	box-sizing: border-box;
-	position: relative;
 }
 
-@media screen and (max-width: 530px) {
+/* @media screen and (max-width: 530px) {
 	.popup__container {
 		max-width: 250px;
 	}
@@ -49,7 +50,7 @@
 		max-width: 320px;
 		min-height: 258px;
 	}
-}
+} */
 
 .popup__button-close-icon {
 	background-image: url('../../images/popup-close-icon.png');
@@ -74,14 +75,14 @@
 	outline: none;
 }
 
-@media screen and (max-width: 320px) {
+/* @media screen and (max-width: 320px) {
 	.popup__button-close-icon {
 		width: 30px;
 		height: 30px;
 		top: 0;
 		right: 0;
 	}
-}
+} */
 
 .popup__title {
 	color: #1a1b22;
@@ -122,9 +123,9 @@
 	color: #000000;
 }
 
-.popup__input:focus {
+/* .popup__input:focus {
 	outline: none;
-}
+} */
 
 .popup__input-error {
 	margin-top: 5px;
@@ -208,3 +209,73 @@
 .popup-info__choice {
 	margin-left: 0;
 }
+
+@media screen and (max-width: 550px) {
+	.popup {
+	  align-items: flex-end;
+	}
+  
+	.popup__container {
+	  border-radius: 16px 16px 0 0;
+	  width: 100%;
+	  max-height: 100%;
+	  height: calc(100vh - 56px);
+	  display: flex;
+	  flex-direction: column;
+	  align-items: flex-start;
+	  position: relative;
+	  padding: 16px 16px 0px 16px;
+	}
+  
+	.popup__form {
+	  width: 100%;
+	  
+	  display: flex;
+	  flex-direction: column;
+	  align-items: flex-start;
+	}
+  
+	.popup__title {
+	  font-size: 24px;
+	  line-height: 28px;
+	  /* padding: 17px 16px 22px 16px; */
+	  /* padding-left: 16px; */
+	}
+  
+	.popup__label {
+	  /* margin: 22px 16px 0; */
+	  margin-top: 22px
+	}
+  
+	.popup__input {
+	  /* width: calc(100% - 32px); */
+	  width: 100%;
+	  /* margin: 9px 16px 3px; */
+	}
+  
+	.popup__input-error {
+	  /* width: calc(100% - 32px); */
+	  width: 100%;
+	  margin: auto;
+	  height: auto;
+	}
+  
+	.popup__button {
+	  /* margin: 23px 16px 0; */
+	  margin-top: 23px;
+	  width: 100%;
+	  /* width: calc(100% - 32px); */
+	}
+  
+	.popup__choice {
+	  margin: 16px auto 0;
+	}
+  
+	.popup__button-close-icon {
+	  height: 28px;
+	  width: 28px;
+	  top: -42px;
+	  right: 25px;
+	  position: absolute;
+	}
+  }

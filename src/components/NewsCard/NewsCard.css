@@ -189,6 +189,7 @@
   
     .news-card__date {
       padding: 16px 16px 12px;
+      margin: 0;
     }
     
     .news-card__description {

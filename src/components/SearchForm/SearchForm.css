@@ -47,10 +47,6 @@
 	box-sizing: border-box;
 }
 
-.search-form__input:focus {
-	outline: none;
-}
-
 .search-form__button-find {
 	font-family: 'Roboto', Arial, sans-serif;
 	font-size: 18px;

@@ -16,7 +16,7 @@ function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, sou
                     <div className='news-card__tag'>{tagTitle}</div>
                     <img className='news-card__image' src={imageLink} alt={imageAlt} />
                 </div>
-                <time className='news-card__date'>{date}</time>
+                <p className='news-card__date'>{date}</p>
                 <h3 className='news-card__title'>{title}</h3>
                 <p className='news-card__description'>{description}</p>
             </div>

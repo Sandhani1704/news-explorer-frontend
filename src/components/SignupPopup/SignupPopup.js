@@ -50,6 +50,14 @@ function SignupPopup({ isOpen, onClose, buttonText, onSignin, onSubmit }) {
         })
     }
 
+    React.useEffect(() => {
+        setPassword('')
+        setEmail('')
+        setName('')
+        setIsValidationMessage({ email: '', password: '', name: '' })
+        setIsValid({ email: false, password: false, name: false })
+    }, [isOpen]);
+
     const isSubmitDisabled = Object.values(isValid).every(Boolean)
 
 
@@ -66,18 +74,18 @@ function SignupPopup({ isOpen, onClose, buttonText, onSignin, onSubmit }) {
                 required
                 minLength='6'
                 maxLength='50' />
-            <span id='email-input-error' className={`popup__input-error ${!isValid.email && 'popup__input-error_active'}`}>{validationMessage.email}</span>
+            <span id='email-error' className={`popup__input-error ${!isValid.email && 'popup__input-error_active'}`}>{validationMessage.email}</span>
             <label className='popup__label'>Пароль</label>
             <input className='popup__input' onChange={handleInputPasswordChange} value={password} id='password' placeholder='Введите пароль' type='password' name='password'
                 required
                 minLength='6'
                 maxLength='50' />
-            <span id='password-input-error' className={`popup__input-error ${!isValid.password && 'popup__input-error_active'}`}>{validationMessage.password}</span>
+            <span id='password-error' className={`popup__input-error ${!isValid.password && 'popup__input-error_active'}`}>{validationMessage.password}</span>
             <label className='popup__label'>Имя</label>
             <input className='popup__input' onChange={handleInputNameChange} value={name} id='name' placeholder='Введите своё имя' type='text' name='name' required
                 minLength='2'
                 maxLength='50' />
-            <span id='password-input-error' className={`popup__input-error ${!isValid.name && 'popup__input-error_active'}`}>{validationMessage.name}</span>
+            <span id='password-error' className={`popup__input-error ${!isValid.name && 'popup__input-error_active'}`}>{validationMessage.name}</span>
             <button type='submit' className={`popup__button ${!isSubmitDisabled && 'popup__button_inactive'}`} disabled={!isSubmitDisabled}>{buttonText}</button>
             <p className='popup__choice'>или <button type='button' className='popup__button-link' onClick={onSignin}>Войти</button></p>
         </PopupWithForm>
