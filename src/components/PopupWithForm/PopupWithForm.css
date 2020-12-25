@@ -9,8 +9,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: visibility 1s,opacity .5s linear;
-	/* transition: visibility .7s, opacity .7s; */
+	transition: visibility .7s, opacity .7s;
 	z-index: 2;
 }
 
@@ -39,19 +38,6 @@
 	box-sizing: border-box;
 }
 
-/* @media screen and (max-width: 530px) {
-	.popup__container {
-		max-width: 250px;
-	}
-}
-
-@media screen and (max-width: 320px) {
-	.popup__container {
-		max-width: 320px;
-		min-height: 258px;
-	}
-} */
-
 .popup__button-close-icon {
 	background-image: url('../../images/popup-close-icon.png');
 	position: absolute;
@@ -74,15 +60,6 @@
 .popup__button-close-icon:focus {
 	outline: none;
 }
-
-/* @media screen and (max-width: 320px) {
-	.popup__button-close-icon {
-		width: 30px;
-		height: 30px;
-		top: 0;
-		right: 0;
-	}
-} */
 
 .popup__title {
 	color: #1a1b22;
@@ -122,10 +99,6 @@
 	padding: 10px 0;
 	color: #000000;
 }
-
-/* .popup__input:focus {
-	outline: none;
-} */
 
 .popup__input-error {
 	margin-top: 5px;
@@ -167,12 +140,6 @@
 .popup__button:focus {
 	outline: none;
 }
-
-
-/* .popup__button:disabled {
-	background-color: #e6e8eb;
-	color: #b6bcbf;
-} */
 
 .popup__button:hover:enabled {
 	background-color: #347eff;
@@ -226,10 +193,14 @@
 	  position: relative;
 	  padding: 16px 16px 0px 16px;
 	}
+
+	.popup__overlay {
+		background-image: url('../../images/header-background-image.png');
+		z-index: 0;
+	}
   
 	.popup__form {
 	  width: 100%;
-	  
 	  display: flex;
 	  flex-direction: column;
 	  align-items: flex-start;
@@ -238,33 +209,25 @@
 	.popup__title {
 	  font-size: 24px;
 	  line-height: 28px;
-	  /* padding: 17px 16px 22px 16px; */
-	  /* padding-left: 16px; */
 	}
   
 	.popup__label {
-	  /* margin: 22px 16px 0; */
-	  margin-top: 22px
+	   margin-top: 22px
 	}
   
 	.popup__input {
-	  /* width: calc(100% - 32px); */
-	  width: 100%;
-	  /* margin: 9px 16px 3px; */
+	   width: 100%;
 	}
   
 	.popup__input-error {
-	  /* width: calc(100% - 32px); */
 	  width: 100%;
 	  margin: auto;
 	  height: auto;
 	}
   
 	.popup__button {
-	  /* margin: 23px 16px 0; */
 	  margin-top: 23px;
 	  width: 100%;
-	  /* width: calc(100% - 32px); */
 	}
   
 	.popup__choice {

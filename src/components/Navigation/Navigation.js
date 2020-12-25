@@ -14,7 +14,7 @@ function Navigation({ onLogin, loggedIn }) {
                 }}>
             </button>
 
-            <div className={`header__nav-conteiner ${humburgerOpened && 'header__nav-conteiner_opened'}`}>
+            <div className={`header__nav-conteiner ${humburgerOpened ? 'header__nav-conteiner_opened' : ''}`}>
                 <div className='header__nav-header'>
                     {humburgerOpened && <Link to='/' className='header__nav-logo'>
                         NewsExplorer
