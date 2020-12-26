@@ -85,7 +85,7 @@ function SignupPopup({ isOpen, onClose, buttonText, onSignin, onSubmit }) {
             <input className='popup__input' onChange={handleInputNameChange} value={name} id='name' placeholder='Введите своё имя' type='text' name='name' required
                 minLength='2'
                 maxLength='50' />
-            <span id='password-error' className={`popup__input-error ${!isValid.name && 'popup__input-error_active'}`}>{validationMessage.name}</span>
+            <span id='name-error' className={`popup__input-error ${!isValid.name && 'popup__input-error_active'}`}>{validationMessage.name}</span>
             <button type='submit' className={`popup__button ${!isSubmitDisabled && 'popup__button_inactive'}`} disabled={!isSubmitDisabled}>{buttonText}</button>
             <p className='popup__choice'>или <button type='button' className='popup__button-link' onClick={onSignin}>Войти</button></p>
         </PopupWithForm>
