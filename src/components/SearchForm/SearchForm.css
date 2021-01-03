@@ -71,6 +71,17 @@
 	background-color: #347eff;
 }
 
+.search__input-error {
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 16px;
+  line-height: 12px;
+  color: red;
+  text-shadow: 1px 1px 2px black, 0 0 1em red;
+  display: block;
+  margin: 10px auto 5px;
+  text-align: center;
+}
+
 @media screen and (max-width: 804px) {
 	.search-form {
 		padding: 38px calc(50% - min(545px, 58%) / 2) 48px;

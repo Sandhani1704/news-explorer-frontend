@@ -11,6 +11,10 @@ import InfoPopup from '../InfoPopup/InfoPopup'
 import SavedNews from '../SavedNews/SavedNews'
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader'
 import Main from '../Main/Main'
+import * as news from '../../utils/NewsApi'
+import Preloader from '../Preloader/Preloader'
+
+// 4d20677ef0194e41b36c1126d9b92ea8
 
 function App() {
 
@@ -18,6 +22,11 @@ function App() {
     const [popupSignupOpen, setIsSignupPopupOpen] = React.useState(false);
     const [popupInfoOpen, setIsPopupInfoOpen] = React.useState(false);
     const [loggedIn, setloggedIn] = React.useState(false);
+    const [articles, setArticles] = React.useState([]);
+    const [preloader, setPreloader] = React.useState(false);
+    // const [notFound, setNotFound] = React.useState(false);
+    // const [serverError, setServerError] = React.useState(false);
+    const [keyword, setKeyword] = React.useState('');
 
     function handleLoginPopupClick() {
         setIsSigninPopupOpen(true);
@@ -74,6 +83,35 @@ function App() {
         };
     });
 
+    // обработчик поиска новостей
+    function handleSerchNews(keyword) {
+        setArticles([]);
+        localStorage.removeItem('articles');
+        localStorage.removeItem('keyword');
+        setPreloader(true);
+        // setNotFound(false);
+        // setServerError(false);
+        return news.getNews(keyword)
+            .then((data) => {
+                localStorage.setItem('articles', JSON.stringify(data.articles));
+                localStorage.setItem('keyword', keyword);
+                setArticles(data.articles);
+                setKeyword(keyword);
+                // setNotFound(false);
+
+                // if (data.articles.length === 0) {
+                //     setNotFound(true);
+                // }
+            })
+            .catch((err) => {
+                console.log(err);
+                // setServerError(true);
+            })
+            .finally(() => {
+                setPreloader(false);
+            });
+    }
+
     return (
         <div className='app'>
 
@@ -88,9 +126,15 @@ function App() {
                 <Route path='/'>
                     <div className='header-image'>
                         <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} />
-                        <SearchForm />
+                        <SearchForm handleSerchNews={handleSerchNews} />
                     </div>
-                    <Main />
+                    <Main
+                        articles={articles}
+                        keyword={keyword}
+                    />
+                    <Preloader
+                        handlePreloader={preloader}
+                    />
                     <About />
                     <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} onSignup={handleSignupPopupClick} onSubmit={handleLoginSubmit} buttonText='Войти' />
                     <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} onSubmit={handleRegisterSubmit} buttonText='Зарегистрироваться' />
