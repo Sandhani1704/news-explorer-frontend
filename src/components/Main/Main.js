@@ -5,38 +5,41 @@ import Preloader from '../Preloader/Preloader';
 import NewsCardList from '../NewsCardList/NewsCardList'
 
 
-function Main({ articles, keyword }) {
+function Main({ articles, keyword, preloader }) {
     const [newArticles, setNewArticles] = React.useState([]);
+    const [showButton, setShowButton] = React.useState(false);
 
     React.useEffect(() => {
         setNewArticles(articles.slice(0, 3));
-        // if (articles.length <= 3) {
-        //   setShowBth(false);
-        // } else {
-        //   setShowBth(true);
-        // }
-    
-      }, [articles]);
+        if (articles.length <= 3) {
+          setShowButton(false);
+        } else {
+          setShowButton(true);
+        }
+
+    }, [articles]);
 
 
     return (
         <main className='main'>
-            <Preloader />
+            { preloader && <Preloader />}
             <h1 className='main__title'>Результаты поиска</h1>
             <NewsCardList>
-            {newArticles.map((articles, key) => (
-                <NewsCard
-                    key={key}
-                    tagTitle={keyword}
-                    imageLink={articles.urlToImage}
-                    imageAlt={keyword}
-                    date={articles.publishedAt}
-                    title={articles.title}
-                    description={articles.description}
-                    source={articles.source}
-                />
-            ))
-}
+                {newArticles.map((articles, key) => (
+                    <NewsCard
+                        // key={key}
+
+                        tagTitle={keyword}
+                        sourceLink={articles.url}
+                        imageLink={articles.urlToImage}
+                        imageAlt={keyword}
+                        date={articles.publishedAt}
+                        title={articles.title}
+                        description={articles.description}
+                        source={articles.source.name}
+                    />
+                ))
+                }
                 {/* articles={articles} keyword={keyword} */}
                 {/* <NewsCard
                     tagTitle='Природа'
@@ -80,7 +83,7 @@ function Main({ articles, keyword }) {
                     source='Медиазона'
                 /> */}
             </NewsCardList>
-            <button className='main__showmore-button'>Показать еще</button>
+            { showButton && <button className='main__showmore-button'>Показать еще</button> }
 
         </main>
     )

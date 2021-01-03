@@ -12,7 +12,7 @@ import SavedNews from '../SavedNews/SavedNews'
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader'
 import Main from '../Main/Main'
 import * as news from '../../utils/NewsApi'
-import Preloader from '../Preloader/Preloader'
+// import Preloader from '../Preloader/Preloader'
 
 // 4d20677ef0194e41b36c1126d9b92ea8
 
@@ -93,8 +93,10 @@ function App() {
         // setServerError(false);
         return news.getNews(keyword)
             .then((data) => {
+                console.log(data.articles)
                 localStorage.setItem('articles', JSON.stringify(data.articles));
                 localStorage.setItem('keyword', keyword);
+                setPreloader(false);
                 setArticles(data.articles);
                 setKeyword(keyword);
                 // setNotFound(false);
@@ -131,10 +133,11 @@ function App() {
                     <Main
                         articles={articles}
                         keyword={keyword}
+                        preloader={preloader}
                     />
-                    <Preloader
-                        handlePreloader={preloader}
-                    />
+                    {/* <Preloader
+                        
+                    /> */}
                     <About />
                     <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} onSignup={handleSignupPopupClick} onSubmit={handleLoginSubmit} buttonText='Войти' />
                     <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} onSubmit={handleRegisterSubmit} buttonText='Зарегистрироваться' />

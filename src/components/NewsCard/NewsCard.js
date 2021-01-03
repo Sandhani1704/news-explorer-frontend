@@ -2,7 +2,7 @@ import React from 'react';
 import './NewsCard.css'
 import { useLocation } from 'react-router-dom';
 
-function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source }) {
+function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source, sourceLink }) {
     const location = useLocation();
 
     return (
@@ -14,7 +14,7 @@ function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, sou
                         <span className='news-card__button-tooltip'>Войдите, чтобы сохранять статьи</span>
                     </button>}
                     <div className='news-card__tag'>{tagTitle}</div>
-                    <img className='news-card__image' src={imageLink} alt={imageAlt} />
+                    <a href={sourceLink} target='_blank' rel='noopener noreferrer' className='news-card__source-link'><img className='news-card__image' src={imageLink} alt={imageAlt} /></a>
                 </div>
                 <p className='news-card__date'>{date}</p>
                 <h3 className='news-card__title'>{title}</h3>

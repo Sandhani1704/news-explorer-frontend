@@ -19,7 +19,15 @@
     padding-bottom: 52%;
     
   }
-  
+  .news-card__source-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    
+  }
   .news-card__image {
     display: block;
     width: 100%;
@@ -27,6 +35,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    
   }
   
   .news-card__tag {

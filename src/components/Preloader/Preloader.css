@@ -1,7 +1,7 @@
 .circle-preloader__conteiner {
 	margin: 0;
-	visibility: hidden;
-	display: none;
+	/* visibility: hidden;
+	display: none; */
 }
 
 .circle-preloader {
