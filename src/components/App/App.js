@@ -11,9 +11,10 @@ import InfoPopup from '../InfoPopup/InfoPopup'
 import SavedNews from '../SavedNews/SavedNews'
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader'
 import Main from '../Main/Main'
+import NotFound from '../NotFound/NotFound'
 import * as news from '../../utils/NewsApi'
-// import Preloader from '../Preloader/Preloader'
-
+import Preloader from '../Preloader/Preloader';
+import ServerError from '../ServerError/ServerError';
 // 4d20677ef0194e41b36c1126d9b92ea8
 
 function App() {
@@ -24,8 +25,8 @@ function App() {
     const [loggedIn, setloggedIn] = React.useState(false);
     const [articles, setArticles] = React.useState([]);
     const [preloader, setPreloader] = React.useState(false);
-    // const [notFound, setNotFound] = React.useState(false);
-    // const [serverError, setServerError] = React.useState(false);
+    const [notFound, setNotFound] = React.useState(false);
+    const [serverError, setServerError] = React.useState(false);
     const [keyword, setKeyword] = React.useState('');
 
     function handleLoginPopupClick() {
@@ -89,8 +90,8 @@ function App() {
         localStorage.removeItem('articles');
         localStorage.removeItem('keyword');
         setPreloader(true);
-        // setNotFound(false);
-        // setServerError(false);
+        setNotFound(false);
+        setServerError(false);
         return news.getNews(keyword)
             .then((data) => {
                 console.log(data.articles)
@@ -99,15 +100,15 @@ function App() {
                 setPreloader(false);
                 setArticles(data.articles);
                 setKeyword(keyword);
-                // setNotFound(false);
+                setNotFound(false);
 
-                // if (data.articles.length === 0) {
-                //     setNotFound(true);
-                // }
+                if (data.articles.length === 0) {
+                    setNotFound(true);
+                }
             })
             .catch((err) => {
                 console.log(err);
-                // setServerError(true);
+                setServerError(true);
             })
             .finally(() => {
                 setPreloader(false);
@@ -135,9 +136,9 @@ function App() {
                         keyword={keyword}
                         preloader={preloader}
                     />
-                    {/* <Preloader
-                        
-                    /> */}
+                    {notFound && <NotFound /> }
+                    {preloader && <Preloader /> }
+                    {serverError && <ServerError /> }
                     <About />
                     <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} onSignup={handleSignupPopupClick} onSubmit={handleLoginSubmit} buttonText='Войти' />
                     <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} onSubmit={handleRegisterSubmit} buttonText='Зарегистрироваться' />

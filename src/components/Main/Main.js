@@ -1,11 +1,10 @@
 import React from 'react';
 import './Main.css';
 import NewsCard from '../NewsCard/NewsCard'
-import Preloader from '../Preloader/Preloader';
 import NewsCardList from '../NewsCardList/NewsCardList'
 
 
-function Main({ articles, keyword, preloader }) {
+function Main({ articles, keyword }) {
     const [newArticles, setNewArticles] = React.useState([]);
     const [showButton, setShowButton] = React.useState(false);
 
@@ -21,8 +20,7 @@ function Main({ articles, keyword, preloader }) {
 
 
     return (
-        <main className='main'>
-            { preloader && <Preloader />}
+        <main className={`main ${newArticles.length > 0 ? '' : 'main_none'}`}>
             <h1 className='main__title'>Результаты поиска</h1>
             <NewsCardList>
                 {newArticles.map((articles, key) => (
