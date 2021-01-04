@@ -11,12 +11,19 @@ function Main({ articles, keyword }) {
     React.useEffect(() => {
         setNewArticles(articles.slice(0, 3));
         if (articles.length <= 3) {
-          setShowButton(false);
+            setShowButton(false);
         } else {
-          setShowButton(true);
+            setShowButton(true);
         }
 
     }, [articles]);
+
+    function handleShowButtonClick() {
+        setNewArticles(articles.slice(0, newArticles.length + 3));
+        if (newArticles.length >= articles.length - 3) {
+            setShowButton(false);
+        }
+    }
 
 
     return (
@@ -26,7 +33,6 @@ function Main({ articles, keyword }) {
                 {newArticles.map((articles, key) => (
                     <NewsCard
                         // key={key}
-
                         tagTitle={keyword}
                         sourceLink={articles.url}
                         imageLink={articles.urlToImage}
@@ -38,50 +44,9 @@ function Main({ articles, keyword }) {
                     />
                 ))
                 }
-                {/* articles={articles} keyword={keyword} */}
-                {/* <NewsCard
-                    tagTitle='Природа'
-                    imageLink='https://cdn.pixabay.com/photo/2020/12/12/13/07/bird-5825414__340.jpg'
-                    imageAlt='Природа'
-                    date='2 августа, 2019'
-                    title='Лесные огоньки: история одной фотографии'
-                    description='Фотограф отвлеклась от освещения суровой политической реальности Мексики, 
-                    чтобы запечатлеть ускользающую красоту одного 
-                    из местных чудес природы.'
-                    source='Афиша'
-                />
-                <NewsCard
-                    tagTitle='Тайга'
-                    imageLink='https://cdn.pixabay.com/photo/2020/12/08/14/27/winter-5814578_960_720.jpg'
-                    imageAlt='Тайга'
-                    date='2 августа, 2019'
-                    title='«Первозданная тайга»: новый фотопроект Игоря Шпиленка'
-                    description='Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. 
-                    В этот раз он отправился в Двинско-Пинежскую тайгу, где...'
-                    source='Медиазона'
-                />
-                <NewsCard
-                    tagTitle='Зима'
-                    imageLink='https://media.istockphoto.com/photos/winter-landscape-birch-forest-at-sunset-freshly-clean-snow-picture-id1180434600'
-                    imageAlt='Зима'
-                    date='2 августа, 2019'
-                    title='«Первозданная тайга»: новый фотопроект Игоря Шпиленка'
-                    description='Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. 
-                    В этот раз он отправился в Двинско-Пинежскую тайгу, где...'
-                    source='Медиазона'
-                />
-                <NewsCard
-                    tagTitle='Тайга'
-                    imageLink='https://cdn.pixabay.com/photo/2020/12/14/13/51/jasper-national-park-5830929__340.jpg'
-                    imageAlt='Тайга'
-                    date='2 августа, 2019'
-                    title='«Первозданная тайга»: новый фотопроект Игоря Шпиленка'
-                    description='Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. 
-                    В этот раз он отправился в Двинско-Пинежскую тайгу, где...'
-                    source='Медиазона'
-                /> */}
+
             </NewsCardList>
-            { showButton && <button className='main__showmore-button'>Показать еще</button> }
+            { showButton && <button className='main__showmore-button' onClick={handleShowButtonClick}>Показать еще</button>}
 
         </main>
     )
