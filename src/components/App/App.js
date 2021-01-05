@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+// import MainApi from '../../utils/MainApi';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm'
 import About from '../About/About'
@@ -15,6 +16,7 @@ import NotFound from '../NotFound/NotFound'
 import * as news from '../../utils/NewsApi'
 import Preloader from '../Preloader/Preloader';
 import ServerError from '../ServerError/ServerError';
+import { register } from '../../utils/MainApi';
 // 4d20677ef0194e41b36c1126d9b92ea8
 
 function App() {
@@ -28,6 +30,27 @@ function App() {
     const [notFound, setNotFound] = React.useState(false);
     const [serverError, setServerError] = React.useState(false);
     const [keyword, setKeyword] = React.useState('');
+    const [message, setMessage] = React.useState('');
+
+    const history = useHistory();
+
+    function handleRegister(password, email, name) {
+        register(password, email, name)
+          .then((res) => {
+            if (res.data) {
+              setIsPopupInfoOpen(true);
+            }
+            if (res.error) {
+              setMessage(res.error);
+            }
+            if (res.message) {
+              setMessage(res.message);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
 
     function handleLoginPopupClick() {
         setIsSigninPopupOpen(true);
@@ -141,7 +164,7 @@ function App() {
                     {serverError && <ServerError /> }
                     <About />
                     <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} onSignup={handleSignupPopupClick} onSubmit={handleLoginSubmit} buttonText='Войти' />
-                    <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} onSubmit={handleRegisterSubmit} buttonText='Зарегистрироваться' />
+                    <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} onSubmit={handleRegisterSubmit} onRegister={handleRegister} message={message} buttonText='Зарегистрироваться' />
                     <InfoPopup isOpen={popupInfoOpen} onSignin={handleSigninPopupClick} onClose={closeAllPopups} />
                     <Footer />
                 </Route>
