@@ -75,6 +75,11 @@ function SignupPopup({ isOpen, onClose, buttonText, onSignin, onSubmit, onRegist
         setIsValid({ email: false, password: false, name: false })
     }, [isOpen]);
 
+    function handleSubmit(params) {
+        onRegister()
+
+    }
+
     const isSubmitDisabled = Object.values(isValid).every(Boolean)
 
 
