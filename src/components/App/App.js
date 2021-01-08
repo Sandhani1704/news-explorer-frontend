@@ -18,6 +18,7 @@ import Preloader from '../Preloader/Preloader';
 import ServerError from '../ServerError/ServerError';
 import { register, login, getContent } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 // 4d20677ef0194e41b36c1126d9b92ea8
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
             .then((res) => {
                 if (res.data) {
                     // console.log(res.data.name)
-                    localStorage.setItem('name', JSON.stringify(res.data.name))
+                    // localStorage.setItem('name', JSON.stringify(res.data.name))
                     setIsPopupInfoOpen(true);
                     setIsSignupPopupOpen(false);
                     setUserName(res.data.name)
@@ -70,9 +71,13 @@ function App() {
             .then((res) => {
                 // console.log(res)
                 if (res.token) {
-                    localStorage.setItem('token', JSON.stringify(res.token))
-                    setloggedIn(true);
-                    setIsSigninPopupOpen(false);
+                    // localStorage.setItem('token', JSON.stringify(res.token))
+                    localStorage.setItem('token', res.token)
+                    tokenCheck();
+                    // setloggedIn(true);
+                    // setIsSigninPopupOpen(false);
+                    closeAllPopups()
+                    // history.push('/saved-news');
                 }
                 else if (res.message) {
                     setMessage(res.message);
@@ -90,23 +95,21 @@ function App() {
 
     const tokenCheck = () => {
         const token = localStorage.getItem('token');
+        console.log(token)
 
         if (!token) {
             return;
         }
 
-        getContent(token).then((res) => {
+        getContent(token)
+        .then((res) => {
             if (res) {
                 console.log(res)
                 setСurrentUser({
-                    id: res.data._id,
-                    name: res.data.name,
-                });
-                // const name = res.data.name;
-
-
+                    id: res._id,
+                    name: res.name,
+                  });
                 setloggedIn(true);
-                // setUserName(name);
                 history.push('/')
             }
         });
@@ -114,7 +117,7 @@ function App() {
 
     React.useEffect(() => {
         tokenCheck();
-    }, [localStorage]);
+    }, []);
 
     function handleLogout() {
         localStorage.removeItem('token');
@@ -213,12 +216,13 @@ function App() {
             <div className='app'>
 
                 <Switch>
-                    <Route path="/saved-news">
-                        <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} userName={userName} loggedOut={handleLogout} />
-                        <SavedNewsHeader userName={userName} />
+
+                    <ProtectedRoute handleLoginPopupClick={handleLoginPopupClick} loggedIn={loggedIn} path="/saved-news">
+                        <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} loggedOut={handleLogout} />
+                        <SavedNewsHeader />
                         <SavedNews />
                         <Footer />
-                    </Route>
+                    </ProtectedRoute>
 
                     <Route path='/'>
                         <div className='header-image'>

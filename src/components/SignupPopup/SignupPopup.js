@@ -6,7 +6,7 @@ function SignupPopup({ isOpen, onClose, buttonText, onSignin, onRegister, messag
 
     const [userData, setUserData] = React.useState({ password: '', email: '', name: '' });
     const [isValid, setIsValid] = React.useState({ email: false, password: false, name: false })
-    const [validationMessage, setIsValidationMessage] = React.useState({ email: "", password: "", name: '' })
+    const [validationMessage, setIsValidationMessage] = React.useState({ email: '', password: '', name: '' })
 
     const handleChange = (e) => {
         const { name, value } = e.target;
