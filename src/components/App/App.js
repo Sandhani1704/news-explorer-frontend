@@ -16,11 +16,13 @@ import NotFound from '../NotFound/NotFound'
 import * as news from '../../utils/NewsApi'
 import Preloader from '../Preloader/Preloader';
 import ServerError from '../ServerError/ServerError';
-import { register } from '../../utils/MainApi';
+import { register, login, getContent } from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 // 4d20677ef0194e41b36c1126d9b92ea8
 
 function App() {
 
+    const [currentUser, setСurrentUser] = React.useState({});
     const [popupSigninOpen, setIsSigninPopupOpen] = React.useState(false);
     const [popupSignupOpen, setIsSignupPopupOpen] = React.useState(false);
     const [popupInfoOpen, setIsPopupInfoOpen] = React.useState(false);
@@ -31,29 +33,98 @@ function App() {
     const [serverError, setServerError] = React.useState(false);
     const [keyword, setKeyword] = React.useState('');
     const [message, setMessage] = React.useState('');
+    const [userName, setUserName] = React.useState('');
 
     const history = useHistory();
 
     function handleRegister(password, email, name) {
         register(password, email, name)
-          .then((res) => {
-            if (res.data) {
-              setIsPopupInfoOpen(true);
+            .then((res) => {
+                if (res.data) {
+                    // console.log(res.data.name)
+                    localStorage.setItem('name', JSON.stringify(res.data.name))
+                    setIsPopupInfoOpen(true);
+                    setIsSignupPopupOpen(false);
+                    setUserName(res.data.name)
+                }
+                else if (res.message) {
+                    setMessage(res.message);
+
+                }
+                else {
+                    setMessage('Что-то пошло не так! Попробуйте ещё раз.');
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+                //  if (err.status === 409) {
+                //     setMessage('Пользователь с таким email уже зарегистрирован');
+                // } else {
+                //     setMessage('Что-то пошло не так! Попробуйте ещё раз');
+                // }
+            })
+    }
+
+    function handleLogin(password, email) {
+        login(password, email)
+            .then((res) => {
+                // console.log(res)
+                if (res.token) {
+                    localStorage.setItem('token', JSON.stringify(res.token))
+                    setloggedIn(true);
+                    setIsSigninPopupOpen(false);
+                }
+                else if (res.message) {
+                    setMessage(res.message);
+
+                }
+                else {
+                    setMessage('Что-то пошло не так! Попробуйте ещё раз.');
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+
+            })
+    }
+
+    const tokenCheck = () => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            return;
+        }
+
+        getContent(token).then((res) => {
+            if (res) {
+                console.log(res)
+                setСurrentUser({
+                    id: res.data._id,
+                    name: res.data.name,
+                });
+                // const name = res.data.name;
+
+
+                setloggedIn(true);
+                // setUserName(name);
+                history.push('/')
             }
-            if (res.error) {
-              setMessage(res.error);
-            }
-            if (res.message) {
-              setMessage(res.message);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+        });
+    }
+
+    React.useEffect(() => {
+        tokenCheck();
+    }, [localStorage]);
+
+    function handleLogout() {
+        localStorage.removeItem('token');
+        setloggedIn(false);
+        history.push('/signin');
+    }
 
     function handleLoginPopupClick() {
         setIsSigninPopupOpen(true);
+        setMessage('');
     }
 
     function closeAllPopups() {
@@ -65,6 +136,7 @@ function App() {
     function handleSignupPopupClick() {
         setIsSigninPopupOpen(false);
         setIsSignupPopupOpen(true);
+        setMessage('');
     }
 
     function handleSigninPopupClick() {
@@ -73,17 +145,15 @@ function App() {
         setIsPopupInfoOpen(false);
     }
 
-    function handleRegisterSubmit(evt) {
-        evt.preventDefault();
-        setIsPopupInfoOpen(true);
-        setIsSignupPopupOpen(false)
-    }
-
-    function handleLoginSubmit(evt) {
-        evt.preventDefault();
-        setIsSigninPopupOpen(false);
-        setloggedIn(true);
-    }
+    // React.useEffect(() => {
+    //     if (loggedIn) {
+    //         Promise.all([getContent()])
+    //             .then(([userInfo]) => {
+    //                 setСurrentUser(userInfo)
+    //             })
+    //             .catch((error) => console.log('Ошибка запроса - ' + error))
+    //     }
+    // }, [loggedIn]);
 
     React.useEffect(() => {
         function handleEscClose(evt) {
@@ -139,38 +209,40 @@ function App() {
     }
 
     return (
-        <div className='app'>
+        <CurrentUserContext.Provider value={currentUser}>
+            <div className='app'>
 
-            <Switch>
-                <Route path="/saved-news">
-                    <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} />
-                    <SavedNewsHeader />
-                    <SavedNews />
-                    <Footer />
-                </Route>
+                <Switch>
+                    <Route path="/saved-news">
+                        <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} userName={userName} loggedOut={handleLogout} />
+                        <SavedNewsHeader userName={userName} />
+                        <SavedNews />
+                        <Footer />
+                    </Route>
 
-                <Route path='/'>
-                    <div className='header-image'>
-                        <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} />
-                        <SearchForm handleSerchNews={handleSerchNews} />
-                    </div>
-                    <Main
-                        articles={articles}
-                        keyword={keyword}
-                        preloader={preloader}
-                    />
-                    {notFound && <NotFound /> }
-                    {preloader && <Preloader /> }
-                    {serverError && <ServerError /> }
-                    <About />
-                    <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} onSignup={handleSignupPopupClick} onSubmit={handleLoginSubmit} buttonText='Войти' />
-                    <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} onSubmit={handleRegisterSubmit} onRegister={handleRegister} message={message} buttonText='Зарегистрироваться' />
-                    <InfoPopup isOpen={popupInfoOpen} onSignin={handleSigninPopupClick} onClose={closeAllPopups} />
-                    <Footer />
-                </Route>
+                    <Route path='/'>
+                        <div className='header-image'>
+                            <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} userName={userName} loggedOut={handleLogout} />
+                            <SearchForm handleSerchNews={handleSerchNews} />
+                        </div>
+                        <Main
+                            articles={articles}
+                            keyword={keyword}
+                            preloader={preloader}
+                        />
+                        {notFound && <NotFound />}
+                        {preloader && <Preloader />}
+                        {serverError && <ServerError />}
+                        <About />
+                        <SigninPopup isOpen={popupSigninOpen} onClose={closeAllPopups} onSignup={handleSignupPopupClick} onLogin={handleLogin} message={message} buttonText='Войти' />
+                        <SignupPopup isOpen={popupSignupOpen} onClose={closeAllPopups} onSignin={handleSigninPopupClick} onRegister={handleRegister} message={message} buttonText='Зарегистрироваться' />
+                        <InfoPopup isOpen={popupInfoOpen} onSignin={handleSigninPopupClick} onClose={closeAllPopups} />
+                        <Footer />
+                    </Route>
 
-            </Switch>
-        </div>
+                </Switch>
+            </div>
+        </CurrentUserContext.Provider>
     )
 }
 
