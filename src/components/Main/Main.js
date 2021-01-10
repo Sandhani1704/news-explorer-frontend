@@ -34,7 +34,7 @@ function Main({ articles, keyword, loggedIn, handleSaveNews, saveArticles }) {
             <NewsCardList>
                 {newArticles.map((article, key) => (
                     <NewsCard
-                        // key={key}
+                        key={key}
                         tagTitle={keyword}
                         sourceLink={article.url}
                         imageLink={article.urlToImage}

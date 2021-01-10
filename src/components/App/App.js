@@ -111,6 +111,7 @@ function App() {
                         name: res.name,
                     });
                     setloggedIn(true);
+                    console.log(currentUser)
                     // history.push('/')
                 }
             });
@@ -240,7 +241,7 @@ function App() {
 
     React.useEffect(() => {
         getMySaveNews()
-    }, []);
+    }, [currentUser.id, loggedIn]);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>

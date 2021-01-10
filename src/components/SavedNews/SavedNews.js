@@ -14,8 +14,9 @@ function SavedNews({ articles, handleSaveNews, loggedIn, keyword, saveArticles, 
         <section className='saved-news'>
             <NewsCardList>
             
-            { saveArticles.map((article) => (
+            { saveArticles.map((article, key) => (
                 <NewsCard
+                key={key}
                 tagTitle={article.keyword}
                 sourceLink={article.url}
                 imageLink={article.image}
