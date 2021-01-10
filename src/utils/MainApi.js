@@ -46,8 +46,9 @@ export const getContent = (token) => {
         .then(data => data)
 }
 
-export const saveArticle = ({ sourceLink, keyword, title, text, date, source, image }) => {
-    const article = { sourceLink, keyword, title, text, date, source, image };
+export const saveArticle = ({ keyword, title, text, date, source, link, image }) => {
+    const article = { keyword, title, text, date, source, link, image };
+  
     return fetch(`${MAIN_URL}/articles`, {
       method: 'POST',
       headers: {

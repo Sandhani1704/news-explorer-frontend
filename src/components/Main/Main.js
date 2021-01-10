@@ -2,9 +2,11 @@ import React from 'react';
 import './Main.css';
 import NewsCard from '../NewsCard/NewsCard'
 import NewsCardList from '../NewsCardList/NewsCardList'
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 
-function Main({ articles, keyword, loggedIn, handleSaveNews }) {
+function Main({ articles, keyword, loggedIn, handleSaveNews, saveArticles }) {
+    const currentUser = React.useContext(CurrentUserContext);
     const [newArticles, setNewArticles] = React.useState([]);
     const [showButton, setShowButton] = React.useState(false);
 
@@ -30,19 +32,23 @@ function Main({ articles, keyword, loggedIn, handleSaveNews }) {
         <main className={`main ${newArticles.length > 0 ? '' : 'main_none'}`}>
             <h1 className='main__title'>Результаты поиска</h1>
             <NewsCardList>
-                {newArticles.map((articles, key) => (
+                {newArticles.map((article, key) => (
                     <NewsCard
                         // key={key}
                         tagTitle={keyword}
-                        sourceLink={articles.url}
-                        imageLink={articles.urlToImage}
+                        sourceLink={article.url}
+                        imageLink={article.urlToImage}
                         imageAlt={keyword}
-                        date={articles.publishedAt}
-                        title={articles.title}
-                        description={articles.description}
-                        source={articles.source.name}
+                        date={article.publishedAt}
+                        title={article.title}
+                        description={article.description}
+                        source={article.source.name}
                         loggedIn={loggedIn}
                         handleSaveNews={handleSaveNews}
+                        saveArticles={saveArticles}
+                        keyword={keyword}
+                        currentUser={currentUser}
+                        
                     />
                 ))
                 }

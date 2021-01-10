@@ -2,8 +2,9 @@ import React from 'react';
 import './NewsCard.css'
 import { useLocation } from 'react-router-dom';
 
-function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source, sourceLink, loggedIn, handleSaveNews, keyword, articles, save, saveArticles }) {
+function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source, sourceLink, loggedIn, handleSaveNews, keyword, articles, saveArticles }) {
     const location = useLocation();
+    const [save, setSave] = React.useState(false);
 
     function handleFormatDate(date) {
         let now = new Date(date);
@@ -14,14 +15,15 @@ function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, sou
 
     function handleSaveNewsClick() {
         handleSaveNews({
-            title: saveArticles.title,
-            sourceLink: saveArticles.url,
-            keyword: saveArticles.keyword,
-            text: saveArticles.description,
-            date: saveArticles.publishedAt,
-            source: saveArticles.source,
-            image: saveArticles.imageLink,
+            keyword: keyword,
+            title: title,
+            text: description,
+            date: date,
+            source: source,
+            link: sourceLink,
+            image: imageLink
         })
+        setSave(true);
     }
 
     return (

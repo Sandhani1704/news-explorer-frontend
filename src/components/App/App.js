@@ -30,7 +30,6 @@ function App() {
     const [loggedIn, setloggedIn] = React.useState(false);
     const [articles, setArticles] = React.useState([]);
     const [saveArticles, setSaveNewArticles] = React.useState([]);
-    const [save, setSave] = React.useState(false);
     const [preloader, setPreloader] = React.useState(false);
     const [notFound, setNotFound] = React.useState(false);
     const [serverError, setServerError] = React.useState(false);
@@ -112,7 +111,7 @@ function App() {
                         name: res.name,
                     });
                     setloggedIn(true);
-                    history.push('/')
+                    // history.push('/')
                 }
             });
     }
@@ -121,12 +120,16 @@ function App() {
         tokenCheck();
         const articles = localStorage.getItem('articles') ? JSON.parse(localStorage.getItem('articles')) : [];
         setArticles(articles);
+        const keyword = localStorage.getItem('keyword')
+        setKeyword(keyword)
+        console.log(currentUser)
+        // getMySaveNews()
     }, []);
 
     function handleLogout() {
         localStorage.removeItem('token');
         setloggedIn(false);
-        history.push('/signin');
+        history.push('/');
     }
 
     function handleLoginPopupClick() {
@@ -151,16 +154,6 @@ function App() {
         setIsSigninPopupOpen(true);
         setIsPopupInfoOpen(false);
     }
-
-    // React.useEffect(() => {
-    //     if (loggedIn) {
-    //         Promise.all([getContent()])
-    //             .then(([userInfo]) => {
-    //                 setСurrentUser(userInfo)
-    //             })
-    //             .catch((error) => console.log('Ошибка запроса - ' + error))
-    //     }
-    // }, [loggedIn]);
 
     React.useEffect(() => {
         function handleEscClose(evt) {
@@ -216,29 +209,38 @@ function App() {
     }
 
     // получить сохраненные новости
-  function getMySaveNews() {
-    if (loggedIn){
-      return getAllArticles()
-        .then((news) => {
-          const arrayMyNews = news.filter((c) => (c.owner === currentUser.id));
-          setSaveNewArticles(arrayMyNews);
-        })
-        .catch((err) => {
-          console.log(err)
-        });
+    function getMySaveNews() {
+        if (loggedIn) {
+            return getAllArticles()
+                .then((news) => {
+                    // console.log(news)
+                    const arrayMyNews = news.filter((c) => (c.owner === currentUser.id));
+                    setSaveNewArticles(arrayMyNews);
+                    console.log(arrayMyNews)
+                    console.log(saveArticles)
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+        }
     }
-  }
 
-    function handleSaveNews(article) {
-        return saveArticle(article)
+    function handleSaveNews({ keyword, title, text, date, source, link, image }) {
+        return saveArticle({ keyword, title, text, date, source, link, image })
             .then((res) => {
-                setSaveNewArticles([res, ...saveArticles]);
-                setSave(true);
-                // getMySaveNews();
                 console.log(res);
+                // setSaveNewArticles([res, ...saveArticles]);
+                // getMySaveNews()
+                // getMySaveNews();
+                // console.log(res);
+
             })
             .catch((error) => console.log('Ошибка запроса - ' + error))
     }
+
+    React.useEffect(() => {
+        getMySaveNews()
+    }, []);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -255,7 +257,8 @@ function App() {
                             handleSaveNews={handleSaveNews}
                             loggedIn={loggedIn}
                             saveArticles={saveArticles}
-                            save={save} />
+                            getMySaveNews={getMySaveNews}
+                             />
                         <Footer />
                     </ProtectedRoute>
 
@@ -270,6 +273,8 @@ function App() {
                             keyword={keyword}
                             preloader={preloader}
                             handleSaveNews={handleSaveNews}
+                            
+                        // saveArticles={saveArticles}
                         />
                         {notFound && <NotFound />}
                         {preloader && <Preloader />}
