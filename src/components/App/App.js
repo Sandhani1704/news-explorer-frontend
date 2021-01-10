@@ -16,7 +16,7 @@ import NotFound from '../NotFound/NotFound'
 import * as news from '../../utils/NewsApi'
 import Preloader from '../Preloader/Preloader';
 import ServerError from '../ServerError/ServerError';
-import { register, login, getContent } from '../../utils/MainApi';
+import { register, login, getContent, saveArticle, getAllArticles } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 // 4d20677ef0194e41b36c1126d9b92ea8
@@ -29,6 +29,8 @@ function App() {
     const [popupInfoOpen, setIsPopupInfoOpen] = React.useState(false);
     const [loggedIn, setloggedIn] = React.useState(false);
     const [articles, setArticles] = React.useState([]);
+    const [saveArticles, setSaveNewArticles] = React.useState([]);
+    const [save, setSave] = React.useState(false);
     const [preloader, setPreloader] = React.useState(false);
     const [notFound, setNotFound] = React.useState(false);
     const [serverError, setServerError] = React.useState(false);
@@ -102,21 +104,23 @@ function App() {
         }
 
         getContent(token)
-        .then((res) => {
-            if (res) {
-                console.log(res)
-                setСurrentUser({
-                    id: res._id,
-                    name: res.name,
-                  });
-                setloggedIn(true);
-                history.push('/')
-            }
-        });
+            .then((res) => {
+                if (res) {
+                    console.log(res)
+                    setСurrentUser({
+                        id: res._id,
+                        name: res.name,
+                    });
+                    setloggedIn(true);
+                    history.push('/')
+                }
+            });
     }
 
     React.useEffect(() => {
         tokenCheck();
+        const articles = localStorage.getItem('articles') ? JSON.parse(localStorage.getItem('articles')) : [];
+        setArticles(articles);
     }, []);
 
     function handleLogout() {
@@ -211,6 +215,31 @@ function App() {
             });
     }
 
+    // получить сохраненные новости
+  function getMySaveNews() {
+    if (loggedIn){
+      return getAllArticles()
+        .then((news) => {
+          const arrayMyNews = news.filter((c) => (c.owner === currentUser.id));
+          setSaveNewArticles(arrayMyNews);
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+    }
+  }
+
+    function handleSaveNews(article) {
+        return saveArticle(article)
+            .then((res) => {
+                setSaveNewArticles([res, ...saveArticles]);
+                setSave(true);
+                // getMySaveNews();
+                console.log(res);
+            })
+            .catch((error) => console.log('Ошибка запроса - ' + error))
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className='app'>
@@ -220,7 +249,13 @@ function App() {
                     <ProtectedRoute handleLoginPopupClick={handleLoginPopupClick} loggedIn={loggedIn} path="/saved-news">
                         <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} loggedOut={handleLogout} />
                         <SavedNewsHeader />
-                        <SavedNews />
+                        <SavedNews
+                            articles={articles}
+                            keyword={keyword}
+                            handleSaveNews={handleSaveNews}
+                            loggedIn={loggedIn}
+                            saveArticles={saveArticles}
+                            save={save} />
                         <Footer />
                     </ProtectedRoute>
 
@@ -230,9 +265,11 @@ function App() {
                             <SearchForm handleSerchNews={handleSerchNews} />
                         </div>
                         <Main
+                            loggedIn={loggedIn}
                             articles={articles}
                             keyword={keyword}
                             preloader={preloader}
+                            handleSaveNews={handleSaveNews}
                         />
                         {notFound && <NotFound />}
                         {preloader && <Preloader />}

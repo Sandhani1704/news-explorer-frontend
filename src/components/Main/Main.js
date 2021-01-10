@@ -4,7 +4,7 @@ import NewsCard from '../NewsCard/NewsCard'
 import NewsCardList from '../NewsCardList/NewsCardList'
 
 
-function Main({ articles, keyword }) {
+function Main({ articles, keyword, loggedIn, handleSaveNews }) {
     const [newArticles, setNewArticles] = React.useState([]);
     const [showButton, setShowButton] = React.useState(false);
 
@@ -41,6 +41,8 @@ function Main({ articles, keyword }) {
                         title={articles.title}
                         description={articles.description}
                         source={articles.source.name}
+                        loggedIn={loggedIn}
+                        handleSaveNews={handleSaveNews}
                     />
                 ))
                 }

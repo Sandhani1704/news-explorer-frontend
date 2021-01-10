@@ -45,3 +45,37 @@ export const getContent = (token) => {
         .then(res => res.json())
         .then(data => data)
 }
+
+export const saveArticle = ({ sourceLink, keyword, title, text, date, source, image }) => {
+    const article = { sourceLink, keyword, title, text, date, source, image };
+    return fetch(`${MAIN_URL}/articles`, {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify(article)
+    })
+    .then(res => res.json())
+    .catch((err) => {return Promise.reject(err.message)});
+  }
+
+  // получить все сохраненные новости
+export const getAllArticles = () => {
+    return fetch(
+      `${MAIN_URL}/articles`,
+      {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+      }
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {return Promise.reject(err.message)});
+  }
