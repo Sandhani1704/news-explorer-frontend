@@ -16,7 +16,7 @@ import NotFound from '../NotFound/NotFound'
 import * as news from '../../utils/NewsApi'
 import Preloader from '../Preloader/Preloader';
 import ServerError from '../ServerError/ServerError';
-import { register, login, getContent, saveArticle, getAllArticles } from '../../utils/MainApi';
+import { register, login, getContent, saveArticle, getAllArticles, deleteArticle } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 // 4d20677ef0194e41b36c1126d9b92ea8
@@ -124,7 +124,7 @@ function App() {
         const keyword = localStorage.getItem('keyword')
         setKeyword(keyword)
         console.log(currentUser)
-        // getMySaveNews()
+        getMySaveNews()
     }, []);
 
     function handleLogout() {
@@ -239,6 +239,18 @@ function App() {
             .catch((error) => console.log('Ошибка запроса - ' + error))
     }
 
+    const handleArticleDelete = (articleId) => {
+        // Отправляем запрос в API и получаем обновлённые данные карточки
+        deleteArticle(articleId)
+            .then(() => {
+                const newCards = saveArticles.filter((item) => item._id !== articleId);
+                setSaveNewArticles(newCards);
+                console.log('статья удалена')
+            })
+            .catch((error) => console.log('Ошибка удаления карточки : ', error))
+
+    }
+
     React.useEffect(() => {
         getMySaveNews()
     }, [currentUser.id, loggedIn]);
@@ -259,7 +271,8 @@ function App() {
                             loggedIn={loggedIn}
                             saveArticles={saveArticles}
                             getMySaveNews={getMySaveNews}
-                             />
+                            handleArticleDelete={handleArticleDelete}
+                        />
                         <Footer />
                     </ProtectedRoute>
 
@@ -274,7 +287,8 @@ function App() {
                             keyword={keyword}
                             preloader={preloader}
                             handleSaveNews={handleSaveNews}
-                            
+                            handleArticleDelete={handleArticleDelete}
+
                         // saveArticles={saveArticles}
                         />
                         {notFound && <NotFound />}

@@ -3,7 +3,7 @@ import NewsCard from '../NewsCard/NewsCard';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import './SavedNews.css';
 
-function SavedNews({ articles, handleSaveNews, loggedIn, keyword, saveArticles, currentUser, getMySaveNews }) {
+function SavedNews({ articles, handleSaveNews, loggedIn, keyword, saveArticles, currentUser, getMySaveNews, handleArticleDelete }) {
 
     // React.useEffect(() => {
     // getMySaveNews()
@@ -31,7 +31,8 @@ function SavedNews({ articles, handleSaveNews, loggedIn, keyword, saveArticles, 
                 keyword={keyword}
                 articles={articles}
                 currentUser={currentUser}
-                // saveArticles={saveArticles}
+                handleArticleDelete={handleArticleDelete}
+                saveArticles={saveArticles}
                 
                 /> 
                 ))

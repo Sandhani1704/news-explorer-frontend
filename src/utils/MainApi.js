@@ -80,3 +80,19 @@ export const getAllArticles = () => {
       })
       .catch((err) => {return Promise.reject(err.message)});
   }
+
+  // удаляет сохранённую статью  по _id
+  export const deleteArticle = (articleId) => {
+    return fetch(`${MAIN_URL}/articles/${articleId}`, {
+      method: 'DELETE',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      },
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {return Promise.reject(err.message)});
+  }
