@@ -49,7 +49,8 @@ function Main({ articles, keyword, loggedIn, handleSaveNews, saveArticles, handl
                         keyword={keyword}
                         currentUser={currentUser}
                         handleArticleDelete={handleArticleDelete}
-                        
+                    // save={save}
+
                     />
                 ))
                 }

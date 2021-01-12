@@ -35,6 +35,10 @@
     margin: 0;
   }
 
+  .news-header__keywords_none {
+    display: none;
+  }
+
   .saved-news__span {
     font-weight: 700;
   }

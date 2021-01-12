@@ -31,11 +31,13 @@ function App() {
     const [articles, setArticles] = React.useState([]);
     const [saveArticles, setSaveNewArticles] = React.useState([]);
     const [preloader, setPreloader] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
     const [notFound, setNotFound] = React.useState(false);
     const [serverError, setServerError] = React.useState(false);
     const [keyword, setKeyword] = React.useState('');
     const [message, setMessage] = React.useState('');
     const [userName, setUserName] = React.useState('');
+    // const [save, setSave] = React.useState(false);
 
     const history = useHistory();
 
@@ -96,6 +98,7 @@ function App() {
 
     const tokenCheck = () => {
         const token = localStorage.getItem('token');
+        setLoading(true);
         console.log(token)
 
         if (!token) {
@@ -105,6 +108,7 @@ function App() {
         getContent(token)
             .then((res) => {
                 if (res) {
+                    setLoading(false);
                     console.log(res)
                     setСurrentUser({
                         id: res._id,
@@ -124,7 +128,7 @@ function App() {
         const keyword = localStorage.getItem('keyword')
         setKeyword(keyword)
         console.log(currentUser)
-        getMySaveNews()
+        //getMySaveNews()
     }, []);
 
     function handleLogout() {
@@ -217,6 +221,7 @@ function App() {
                     // console.log(news)
                     const arrayMyNews = news.filter((c) => (c.owner === currentUser.id));
                     setSaveNewArticles(arrayMyNews);
+                    // setSaveNewArticles([arrayMyNews, ...saveArticles]);
                     console.log(arrayMyNews)
                     console.log(saveArticles)
                 })
@@ -230,10 +235,10 @@ function App() {
         return saveArticle({ keyword, title, text, date, source, link, image })
             .then((res) => {
                 console.log(res);
-                // setSaveNewArticles([res, ...saveArticles]);
+                setSaveNewArticles([res, ...saveArticles]);
                 // getMySaveNews()
-                // getMySaveNews();
                 // console.log(res);
+                // setSave(true)
 
             })
             .catch((error) => console.log('Ошибка запроса - ' + error))
@@ -246,6 +251,7 @@ function App() {
                 const newCards = saveArticles.filter((item) => item._id !== articleId);
                 setSaveNewArticles(newCards);
                 console.log('статья удалена')
+                // getMySaveNews()
             })
             .catch((error) => console.log('Ошибка удаления карточки : ', error))
 
@@ -253,7 +259,11 @@ function App() {
 
     React.useEffect(() => {
         getMySaveNews()
+        setloggedIn(true)
     }, [currentUser.id, loggedIn]);
+    // React.useEffect(() => {
+    //     getMySaveNews()
+    // }, []);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -261,9 +271,9 @@ function App() {
 
                 <Switch>
 
-                    <ProtectedRoute handleLoginPopupClick={handleLoginPopupClick} loggedIn={loggedIn} path="/saved-news">
+                    <ProtectedRoute handleLoginPopupClick={handleLoginPopupClick} loggedIn={loggedIn} preloader={preloader} loading={loading} path='/saved-news'>
                         <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} loggedOut={handleLogout} />
-                        <SavedNewsHeader />
+                        <SavedNewsHeader saveArticles={saveArticles} />
                         <SavedNews
                             articles={articles}
                             keyword={keyword}
@@ -288,6 +298,7 @@ function App() {
                             preloader={preloader}
                             handleSaveNews={handleSaveNews}
                             handleArticleDelete={handleArticleDelete}
+                        // save={save}
 
                         // saveArticles={saveArticles}
                         />
