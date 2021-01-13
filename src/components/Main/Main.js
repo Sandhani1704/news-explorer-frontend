@@ -27,7 +27,7 @@ function Main({ articles, keyword, loggedIn, handleSaveNews, saveArticles, handl
         }
     }
 
-
+    console.log(articles)
     return (
         <main className={`main ${newArticles.length > 0 ? '' : 'main_none'}`}>
             <h1 className='main__title'>Результаты поиска</h1>

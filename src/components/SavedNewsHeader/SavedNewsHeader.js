@@ -9,6 +9,7 @@ function SavedNewsHeader({ saveArticles }) {
 
     const myArray = saveArticles.map(i => i = i.keyword);
     const keywordsArr = [...new Set(myArray)];
+    console.log(keywordsArr.length)
 
     function handlerMainText(number) {
         if (number >= 5 || number === 0) {
@@ -48,8 +49,8 @@ function SavedNewsHeader({ saveArticles }) {
     const secondKeyword = `${ucFirst(keywordsArr[1])}`;
     const thirdKeyword = `${ucFirst(keywordsArr[2])}`;
 
-    const keys = `${keywordsArr.length !== 0 ? `saved-news__keywords` : `news-header__keywords_none`}`;
-    const span = `${keywordsArr.length > 3 ? `news-header__keys-span` : `news-header__keys-span_none`}`
+    const keys = `${keywordsArr.length !== 0 ? `saved-news__keywords` : `saved-news__keywords_none`}`;
+    const span = `${keywordsArr.length > 3 ? `saved-news__keywords-span` : `saved-news__keywords-span_none`}`
     const keyword = `${keywordsArr.length === 3 ? ` ${firstKeyword}, ${secondKeyword}, ${thirdKeyword}` : ` ${firstKeyword}, ${secondKeyword}`}`
 
 
@@ -59,7 +60,7 @@ function SavedNewsHeader({ saveArticles }) {
             <p className='saved-news__subtitle'>{`${currentUser.name}, у вас ${saveArticles.length} ${handlerMainText(saveArticles.length)}`}</p>
             {/* <p className='saved-news__keywords'>По ключевым словам: */}
             <p className={keys}>{handlerText(keywordsArr.length)}
-                <span className='saved-news__span'> {keywordsArr.length < 2 ? ` ${firstKeyword}` : `${keyword}`}</span>
+                <span className='saved-news__keywords-span'> {keywordsArr.length < 2 ? ` ${firstKeyword}` : `${keyword}`}</span>
                 <span className={span}> и {keywordsArr.length - 2}{handlerSpanText(keywordsArr.length)}</span></p>
 
         </section>

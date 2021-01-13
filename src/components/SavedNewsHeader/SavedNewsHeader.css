@@ -35,12 +35,16 @@
     margin: 0;
   }
 
-  .news-header__keywords_none {
+  .saved-news__keywords_none {
     display: none;
   }
 
-  .saved-news__span {
+  .saved-news__keywords-span {
     font-weight: 700;
+  }
+
+  .saved-news__keywords-span_none {
+    display: none;
   }
   
    

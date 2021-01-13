@@ -259,7 +259,7 @@ function App() {
 
     React.useEffect(() => {
         getMySaveNews()
-        setloggedIn(true)
+        //setloggedIn(true)
     }, [currentUser.id, loggedIn]);
     // React.useEffect(() => {
     //     getMySaveNews()
