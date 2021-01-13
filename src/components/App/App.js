@@ -257,6 +257,27 @@ function App() {
 
     }
 
+    // function findMySevedNews(article, articles) {
+        function findMySevedNews({ article, myArticle, keyword, title, text, date, source, link, image }) {
+        const mySavedArticle = saveArticles.find((c) => {
+            if (myArticle) {
+                return c.title === myArticle.title && c.text === myArticle.text;
+            }
+
+            if (article) {
+                return c.title === article.title && c.text === article.description;
+            }
+
+        });
+
+        if (mySavedArticle) {
+            handleArticleDelete(mySavedArticle._id);
+        } 
+        else {
+            handleSaveNews({ keyword, title, text, date, source, link, image });
+        }
+    }
+
     React.useEffect(() => {
         getMySaveNews()
         //setloggedIn(true)
@@ -298,6 +319,8 @@ function App() {
                             preloader={preloader}
                             handleSaveNews={handleSaveNews}
                             handleArticleDelete={handleArticleDelete}
+                            findMySevedNews={findMySevedNews}
+                            saveArticles={saveArticles}
                         // save={save}
 
                         // saveArticles={saveArticles}
