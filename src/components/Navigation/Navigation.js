@@ -41,7 +41,6 @@ function Navigation({ onLogin, loggedIn, loggedOut, currentUser }) {
                     </li>
 
                     <li className='header__nav-list-item'>
-                        {/* {loggedIn && <button onClick={onLogin} className={`header__nav-button ${location.pathname === '/saved-news' && 'header__nav-button_black'}`} to='/'> */}
                         {loggedIn && <button className={`header__nav-button ${location.pathname === '/saved-news' && 'header__nav-button_black'}`} onClick={loggedOut}>
                             {currentUser.name}
                             <i className={`header__nav-logout-icon ${location.pathname === '/saved-news' && 'header__nav-logout-icon_black'}`}></i>

@@ -26,7 +26,7 @@ function SavedNews({ articles, handleSaveNews, loggedIn, keyword, saveArticles, 
                         loggedIn={loggedIn}
                         handleSaveNews={handleSaveNews}
                         keyword={keyword}
-                        article={article}
+                        myArticle={article}
                         articles={articles}
                         currentUser={currentUser}
                         handleArticleDelete={handleArticleDelete}

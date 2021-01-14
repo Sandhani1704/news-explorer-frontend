@@ -19,7 +19,6 @@ import ServerError from '../ServerError/ServerError';
 import { register, login, getContent, saveArticle, getAllArticles, deleteArticle } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-// 4d20677ef0194e41b36c1126d9b92ea8
 
 function App() {
 
@@ -37,16 +36,16 @@ function App() {
     const [keyword, setKeyword] = React.useState('');
     const [message, setMessage] = React.useState('');
     const [userName, setUserName] = React.useState('');
-    // const [save, setSave] = React.useState(false);
 
     const history = useHistory();
+
+    console.log(loggedIn)
+    console.log(currentUser)
 
     function handleRegister(password, email, name) {
         register(password, email, name)
             .then((res) => {
                 if (res.data) {
-                    // console.log(res.data.name)
-                    // localStorage.setItem('name', JSON.stringify(res.data.name))
                     setIsPopupInfoOpen(true);
                     setIsSignupPopupOpen(false);
                     setUserName(res.data.name)
@@ -72,15 +71,12 @@ function App() {
     function handleLogin(password, email) {
         login(password, email)
             .then((res) => {
-                // console.log(res)
                 if (res.token) {
                     // localStorage.setItem('token', JSON.stringify(res.token))
                     localStorage.setItem('token', res.token)
                     tokenCheck();
-                    // setloggedIn(true);
-                    // setIsSigninPopupOpen(false);
                     closeAllPopups()
-                    // history.push('/saved-news');
+
                 }
                 else if (res.message) {
                     setMessage(res.message);
@@ -99,7 +95,7 @@ function App() {
     const tokenCheck = () => {
         const token = localStorage.getItem('token');
         setLoading(true);
-        console.log(token)
+        // console.log(token)
 
         if (!token) {
             return;
@@ -109,14 +105,11 @@ function App() {
             .then((res) => {
                 if (res) {
                     setLoading(false);
-                    console.log(res)
                     setСurrentUser({
                         id: res._id,
                         name: res.name,
                     });
                     setloggedIn(true);
-                    console.log(currentUser)
-                    // history.push('/')
                 }
             });
     }
@@ -127,8 +120,6 @@ function App() {
         setArticles(articles);
         const keyword = localStorage.getItem('keyword')
         setKeyword(keyword)
-        console.log(currentUser)
-        //getMySaveNews()
     }, []);
 
     function handleLogout() {
@@ -218,7 +209,6 @@ function App() {
         if (loggedIn) {
             return getAllArticles()
                 .then((news) => {
-                    // console.log(news)
                     const arrayMyNews = news.filter((c) => (c.owner === currentUser.id));
                     setSaveNewArticles(arrayMyNews);
                     // setSaveNewArticles([arrayMyNews, ...saveArticles]);
@@ -236,10 +226,6 @@ function App() {
             .then((res) => {
                 console.log(res);
                 setSaveNewArticles([res, ...saveArticles]);
-                // getMySaveNews()
-                // console.log(res);
-                // setSave(true)
-
             })
             .catch((error) => console.log('Ошибка запроса - ' + error))
     }
@@ -250,15 +236,12 @@ function App() {
             .then(() => {
                 const newCards = saveArticles.filter((item) => item._id !== articleId);
                 setSaveNewArticles(newCards);
-                console.log('статья удалена')
-                // getMySaveNews()
             })
             .catch((error) => console.log('Ошибка удаления карточки : ', error))
 
     }
 
-    // function findMySevedNews(article, articles) {
-        function findMySevedNews({ article, myArticle, keyword, title, text, date, source, link, image }) {
+    function findMySevedNews({ article, myArticle, keyword, title, text, date, source, link, image }) {
         const mySavedArticle = saveArticles.find((c) => {
             if (myArticle) {
                 return c.title === myArticle.title && c.text === myArticle.text;
@@ -272,7 +255,7 @@ function App() {
 
         if (mySavedArticle) {
             handleArticleDelete(mySavedArticle._id);
-        } 
+        }
         else {
             handleSaveNews({ keyword, title, text, date, source, link, image });
         }
@@ -280,11 +263,7 @@ function App() {
 
     React.useEffect(() => {
         getMySaveNews()
-        //setloggedIn(true)
     }, [currentUser.id, loggedIn]);
-    // React.useEffect(() => {
-    //     getMySaveNews()
-    // }, []);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -292,7 +271,7 @@ function App() {
 
                 <Switch>
 
-                    <ProtectedRoute handleLoginPopupClick={handleLoginPopupClick} loggedIn={loggedIn} preloader={preloader} loading={loading} path='/saved-news'>
+                    <ProtectedRoute handleLoginPopupClick={handleLoginPopupClick} loggedIn={loggedIn} preloader={preloader} currentUser={currentUser} loading={loading} path='/saved-news'>
                         <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} loggedOut={handleLogout} />
                         <SavedNewsHeader saveArticles={saveArticles} />
                         <SavedNews
@@ -321,9 +300,7 @@ function App() {
                             handleArticleDelete={handleArticleDelete}
                             findMySevedNews={findMySevedNews}
                             saveArticles={saveArticles}
-                        // save={save}
-
-                        // saveArticles={saveArticles}
+                            handleLoginPopupClick={handleLoginPopupClick}
                         />
                         {notFound && <NotFound />}
                         {preloader && <Preloader />}

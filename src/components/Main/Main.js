@@ -5,7 +5,7 @@ import NewsCardList from '../NewsCardList/NewsCardList'
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 
-function Main({ articles, keyword, loggedIn, handleSaveNews, saveArticles, handleArticleDelete, findMySevedNews }) {
+function Main({ articles, keyword, loggedIn, handleSaveNews, saveArticles, handleArticleDelete, findMySevedNews, handleLoginPopupClick }) {
     const currentUser = React.useContext(CurrentUserContext);
     const [newArticles, setNewArticles] = React.useState([]);
     const [showButton, setShowButton] = React.useState(false);
@@ -27,7 +27,7 @@ function Main({ articles, keyword, loggedIn, handleSaveNews, saveArticles, handl
         }
     }
 
-    console.log(saveArticles)
+    // console.log(saveArticles)
     return (
         <main className={`main ${newArticles.length > 0 ? '' : 'main_none'}`}>
             <h1 className='main__title'>Результаты поиска</h1>
@@ -52,8 +52,7 @@ function Main({ articles, keyword, loggedIn, handleSaveNews, saveArticles, handl
                         currentUser={currentUser}
                         handleArticleDelete={handleArticleDelete}
                         findMySevedNews={findMySevedNews}
-                    // save={save}
-
+                        handleLoginPopupClick={handleLoginPopupClick}
                     />
                 ))
                 }

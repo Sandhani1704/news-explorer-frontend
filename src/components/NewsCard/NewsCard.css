@@ -108,6 +108,7 @@
   }
   
   .news-card__delete-button {
+    position: relative;
     margin-top: 24px;
     margin-right: 24px;
     width: 40px;
@@ -121,7 +122,10 @@
     border-radius: 8px;
     z-index: 1;
   }
-  
+  .news-card__delete-button:hover .news-card__button-tooltip {
+    visibility: visible;
+  }
+
   .news-card__delete-button:hover {
     background-image: url('../../images/garbage-icon-black.png');
   }

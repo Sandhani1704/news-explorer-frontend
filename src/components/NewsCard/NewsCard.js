@@ -2,7 +2,7 @@ import React from 'react';
 import './NewsCard.css'
 import { useLocation } from 'react-router-dom';
 
-function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source, sourceLink, loggedIn, handleSaveNews, keyword, handleArticleDelete, articles, saveArticles, _id, currentUser, findMySevedNews, article }) {
+function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source, sourceLink, loggedIn, handleSaveNews, keyword, handleArticleDelete, articles, saveArticles, _id, currentUser, findMySevedNews, article, myArticle, handleLoginPopupClick }) {
     const location = useLocation();
     const [saved, setSaved] = React.useState(false);
 
@@ -33,20 +33,13 @@ function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, sou
             link: sourceLink,
             image: imageLink,
             article,
-            saveArticles 
+            myArticle
         });
-        setSaved(true);
     }
-
-    console.log(saveArticles)
-    // Определяем сохраненна ли карточка текущим пользователем
-    // const isSaved = saveArticles.likes.some(i => i === currentUser._id);
 
     React.useEffect(() => {
         if (saveArticles) {
-            // setSaved(saveArticles.find((c) => c.title === title));
-            setSaved(true)
-            console.log(saved)
+            setSaved(saveArticles.find((c) => c.title === title));
         }
     }, [saveArticles, title])
 
@@ -59,11 +52,17 @@ function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, sou
         <div className='news-card'>
             <div className='news-card__content-container'>
                 <div className='news-card__image-container'>
-                    {location.pathname === '/saved-news' && <button type='button' className='news-card__delete-button' onClick={handleDelete}></button>}
-                    {/* {location.pathname === '/' && <button type='button' className={saved ? 'news-card__save-button_marked' : 'news-card__save-button'} disabled={!loggedIn} onClick={handleSaveNewsClick}> */}
-                    {location.pathname === '/' && <button type='button' className={`news-card__save-button ${saved ? 'news-card__save-button_marked' : ''}`} disabled={!loggedIn} onClick={handleSaveNewsClick}>
-                        {!loggedIn && <span className='news-card__button-tooltip'>Войдите, чтобы сохранять статьи</span>}
-                    </button>}
+                    {location.pathname === '/saved-news' && <button type='button' className='news-card__delete-button' onClick={handleDelete}>
+                        {loggedIn && <span className='news-card__button-tooltip'>Убрать из сохранённых</span>}</button>}
+                    {location.pathname === '/' && <button type='button' className={`news-card__save-button ${saved ? 'news-card__save-button_marked' : ''}`}
+                        onClick={() => {
+                            if (!loggedIn) {
+                                handleLoginPopupClick();
+                            } else {
+                                handleSaveNewsClick();
+                            }
+
+                        }}>{!loggedIn && <span className='news-card__button-tooltip'>Войдите, чтобы сохранять статьи</span>}</button>}
                     {location.pathname === '/saved-news' && <div className='news-card__tag'>{tagTitle}</div>}
                     <a href={sourceLink} target='_blank' rel='noopener noreferrer' className='news-card__source-link'><img className='news-card__image' src={imageLink} alt={imageAlt} /></a>
                 </div>

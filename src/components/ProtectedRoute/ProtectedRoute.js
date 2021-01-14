@@ -6,8 +6,8 @@ import Preloader from '../../components/Preloader/Preloader';
 const ProtectedRoute = (props) => {
   const currentUser = React.useContext(CurrentUserContext);
   // const [loading, setLoading] = React.useState(false);
-  console.log(currentUser.id)
-  console.log(props.loading)
+  console.log(currentUser)
+  console.log(props.loggedIn)
 
   return (
     <Route>
@@ -15,21 +15,13 @@ const ProtectedRoute = (props) => {
         if (props.loggedIn) {
           return props.children;
         }
-        // if (!currentUser.id) {
-        //   props.handleLoginPopupClick();
-        //   return <Redirect to='/' />;
-        // }
-        else if (props.loading) {
+        else {
           <Preloader />
-          //   props.handleLoginPopupClick();
-          //   return <Redirect to='/' />;
-          // }
+          props.handleLoginPopupClick();
+          return <Redirect to='/' />;
         }
-        // else {
-        //   props.handleLoginPopupClick();
-        //   return <Redirect to='/' />;
-        // }
-      }}
+      }
+      }
     </Route>
   );
 };
