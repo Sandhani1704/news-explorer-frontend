@@ -30,7 +30,6 @@ function App() {
     const [articles, setArticles] = React.useState([]);
     const [saveArticles, setSaveNewArticles] = React.useState([]);
     const [preloader, setPreloader] = React.useState(false);
-    const [loading, setLoading] = React.useState(false);
     const [notFound, setNotFound] = React.useState(false);
     const [serverError, setServerError] = React.useState(false);
     const [keyword, setKeyword] = React.useState('');
@@ -72,10 +71,21 @@ function App() {
         login(password, email)
             .then((res) => {
                 if (res.token) {
-                    // localStorage.setItem('token', JSON.stringify(res.token))
                     localStorage.setItem('token', res.token)
-                    tokenCheck();
+                    setloggedIn(true);
                     closeAllPopups()
+
+                    getContent(res.token)
+                        .then((res) => {
+                            console.log(res)
+                            if (res) {
+                                setСurrentUser({
+                                    id: res._id,
+                                    name: res.name,
+                                });
+
+                            }
+                        });
 
                 }
                 else if (res.message) {
@@ -94,9 +104,6 @@ function App() {
 
     const tokenCheck = () => {
         const token = localStorage.getItem('token');
-        setLoading(true);
-        // console.log(token)
-
         if (!token) {
             return;
         }
@@ -104,7 +111,6 @@ function App() {
         getContent(token)
             .then((res) => {
                 if (res) {
-                    setLoading(false);
                     setСurrentUser({
                         id: res._id,
                         name: res.name,
@@ -120,6 +126,7 @@ function App() {
         setArticles(articles);
         const keyword = localStorage.getItem('keyword')
         setKeyword(keyword)
+        getMySaveNews()
     }, []);
 
     function handleLogout() {
@@ -271,7 +278,7 @@ function App() {
 
                 <Switch>
 
-                    <ProtectedRoute handleLoginPopupClick={handleLoginPopupClick} loggedIn={loggedIn} preloader={preloader} currentUser={currentUser} loading={loading} path='/saved-news'>
+                    <ProtectedRoute handleLoginPopupClick={handleLoginPopupClick} loggedIn={loggedIn} preloader={preloader} currentUser={currentUser} tokenCheck={tokenCheck} path='/saved-news'>
                         <Header onLogin={handleLoginPopupClick} loggedIn={loggedIn} loggedOut={handleLogout} />
                         <SavedNewsHeader saveArticles={saveArticles} />
                         <SavedNews
