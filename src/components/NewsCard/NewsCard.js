@@ -2,7 +2,7 @@ import React from 'react';
 import './NewsCard.css'
 import { useLocation } from 'react-router-dom';
 
-function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source, sourceLink, loggedIn, handleSaveNews, keyword, handleArticleDelete, articles, saveArticles, _id, currentUser, findMySevedNews, article, myArticle, handleLoginPopupClick }) {
+function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source, sourceLink, loggedIn, keyword, handleArticleDelete, saveArticles, _id, findMySevedNews, article, myArticle, handleLoginPopupClick }) {
     const location = useLocation();
     const [saved, setSaved] = React.useState(false);
 
@@ -13,17 +13,7 @@ function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, sou
         return `${now.getDate()} ${month[now.getMonth()]}, ${now.getFullYear()}`;
     }
 
-    function handleSaveNewsClick() {
-        // handleSaveNews({
-        //     keyword: keyword,
-        //     title: title,
-        //     text: description,
-        //     date: date,
-        //     source: source,
-        //     link: sourceLink,
-        //     image: imageLink
-        // })
-        // setSaved(true);
+    function handleClick() {
         findMySevedNews({
             keyword: keyword,
             title: title,
@@ -59,7 +49,7 @@ function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, sou
                             if (!loggedIn) {
                                 handleLoginPopupClick();
                             } else {
-                                handleSaveNewsClick();
+                                handleClick();
                             }
 
                         }}>{!loggedIn && <span className='news-card__button-tooltip'>Войдите, чтобы сохранять статьи</span>}</button>}

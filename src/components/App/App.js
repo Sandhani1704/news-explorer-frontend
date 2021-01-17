@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-// import MainApi from '../../utils/MainApi';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm'
@@ -38,9 +37,6 @@ function App() {
 
     const history = useHistory();
 
-    console.log(loggedIn)
-    console.log(currentUser)
-
     function handleRegister(password, email, name) {
         register(password, email, name)
             .then((res) => {
@@ -77,20 +73,16 @@ function App() {
 
                     getContent(res.token)
                         .then((res) => {
-                            console.log(res)
                             if (res) {
                                 setСurrentUser({
                                     id: res._id,
                                     name: res.name,
                                 });
-
                             }
                         });
-
                 }
                 else if (res.message) {
                     setMessage(res.message);
-
                 }
                 else {
                     setMessage('Что-то пошло не так! Попробуйте ещё раз.');
@@ -100,6 +92,13 @@ function App() {
                 console.log(err)
 
             })
+    }
+
+    function handleLogout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('articles');
+        setloggedIn(false);
+        history.push('/');
     }
 
     const tokenCheck = () => {
@@ -128,12 +127,6 @@ function App() {
         setKeyword(keyword)
         getMySaveNews()
     }, []);
-
-    function handleLogout() {
-        localStorage.removeItem('token');
-        setloggedIn(false);
-        history.push('/');
-    }
 
     function handleLoginPopupClick() {
         setIsSigninPopupOpen(true);
@@ -190,7 +183,6 @@ function App() {
         setServerError(false);
         return news.getNews(keyword)
             .then((data) => {
-                console.log(data.articles)
                 localStorage.setItem('articles', JSON.stringify(data.articles));
                 localStorage.setItem('keyword', keyword);
                 setPreloader(false);
@@ -218,9 +210,6 @@ function App() {
                 .then((news) => {
                     const arrayMyNews = news.filter((c) => (c.owner === currentUser.id));
                     setSaveNewArticles(arrayMyNews);
-                    // setSaveNewArticles([arrayMyNews, ...saveArticles]);
-                    console.log(arrayMyNews)
-                    console.log(saveArticles)
                 })
                 .catch((err) => {
                     console.log(err)
@@ -231,7 +220,6 @@ function App() {
     function handleSaveNews({ keyword, title, text, date, source, link, image }) {
         return saveArticle({ keyword, title, text, date, source, link, image })
             .then((res) => {
-                console.log(res);
                 setSaveNewArticles([res, ...saveArticles]);
             })
             .catch((error) => console.log('Ошибка запроса - ' + error))

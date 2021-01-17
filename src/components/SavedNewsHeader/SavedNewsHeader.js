@@ -5,11 +5,8 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 function SavedNewsHeader({ saveArticles }) {
     const currentUser = React.useContext(CurrentUserContext);
 
-    console.log(saveArticles)
-
     const myArray = saveArticles.map(i => i = i.keyword);
     const keywordsArr = [...new Set(myArray)];
-    console.log(keywordsArr.length)
 
     function handlerMainText(number) {
         if (number >= 5 || number === 0) {
@@ -58,7 +55,6 @@ function SavedNewsHeader({ saveArticles }) {
         <section className='saved-news'>
             <h2 className='saved-news__title'>Сохранённые статьи</h2>
             <p className='saved-news__subtitle'>{`${currentUser.name}, у вас ${saveArticles.length} ${handlerMainText(saveArticles.length)}`}</p>
-            {/* <p className='saved-news__keywords'>По ключевым словам: */}
             <p className={keys}>{handlerText(keywordsArr.length)}
                 <span className='saved-news__keywords-span'> {keywordsArr.length < 2 ? ` ${firstKeyword}` : `${keyword}`}</span>
                 <span className={span}> и {keywordsArr.length - 2}{handlerSpanText(keywordsArr.length)}</span></p>

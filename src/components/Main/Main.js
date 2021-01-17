@@ -27,7 +27,6 @@ function Main({ articles, keyword, loggedIn, handleSaveNews, saveArticles, handl
         }
     }
 
-    // console.log(saveArticles)
     return (
         <main className={`main ${newArticles.length > 0 ? '' : 'main_none'}`}>
             <h1 className='main__title'>Результаты поиска</h1>
@@ -37,7 +36,8 @@ function Main({ articles, keyword, loggedIn, handleSaveNews, saveArticles, handl
                         key={key}
                         tagTitle={keyword}
                         sourceLink={article.url}
-                        imageLink={article.urlToImage}
+                        // imageLink={(article.urlToImage === null) ? 'https://ik.arhano.ru/wp-content/uploads/2020/03/shutterstock_126595589-1-1600x900.jpg' : (article.urlToImage)}
+                        imageLink={(article.urlToImage) || 'https://ik.arhano.ru/wp-content/uploads/2020/03/shutterstock_126595589-1-1600x900.jpg'}
                         imageAlt={keyword}
                         date={article.publishedAt}
                         title={article.title}

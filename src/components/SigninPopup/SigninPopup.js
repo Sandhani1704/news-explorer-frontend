@@ -23,19 +23,6 @@ function SigninPopup({ isOpen, onClose, buttonText, onSignup, onLogin, message }
         })
     }
 
-    // function handleInputPasswordChange(event) {
-    //     const { name, value } = event.target
-    //     setPassword(value);
-    //     setIsValid({
-    //         ...isValid,
-    //         [name]: event.target.validity.valid
-    //     })
-    //     setIsValidationMessage({
-    //         ...validationMessage,
-    //         [name]: event.target.validationMessage
-    //     })
-    // }
-
     React.useEffect(() => {
         setUserData({ password: '', email: '' });
         setIsValidationMessage({ email: '', password: '' })

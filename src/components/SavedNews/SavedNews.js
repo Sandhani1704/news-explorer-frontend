@@ -3,10 +3,8 @@ import NewsCard from '../NewsCard/NewsCard';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import './SavedNews.css';
 
-function SavedNews({ articles, handleSaveNews, loggedIn, keyword, saveArticles, currentUser, getMySaveNews, handleArticleDelete }) {
+function SavedNews({ articles, handleSaveNews, loggedIn, keyword, saveArticles, currentUser, handleArticleDelete }) {
 
-
-    console.log(saveArticles);
     return (
         <section className='saved-news'>
             <NewsCardList>
