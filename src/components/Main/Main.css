@@ -5,6 +5,10 @@
 	background-color: #F5F6F7;
 }
 
+.main_none {
+	display: none;
+}
+
 .main__title {
 	font-family: 'Roboto Slab', Arial, sans-serif;
 	font-style: normal;

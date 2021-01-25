@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Navigation.css';
 import { Link, useLocation } from 'react-router-dom';
 
-function Navigation({ onLogin, loggedIn }) {
+function Navigation({ onLogin, loggedIn, loggedOut, currentUser }) {
     const [humburgerOpened, setHumburgerOpened] = useState(false);
     const location = useLocation();
 
@@ -41,8 +41,8 @@ function Navigation({ onLogin, loggedIn }) {
                     </li>
 
                     <li className='header__nav-list-item'>
-                        {loggedIn && <button onClick={onLogin} className={`header__nav-button ${location.pathname === '/saved-news' && 'header__nav-button_black'}`} to='/'>
-                            Грета
+                        {loggedIn && <button className={`header__nav-button ${location.pathname === '/saved-news' && 'header__nav-button_black'}`} onClick={loggedOut}>
+                            {currentUser.name}
                             <i className={`header__nav-logout-icon ${location.pathname === '/saved-news' && 'header__nav-logout-icon_black'}`}></i>
                         </button>}
                     </li>

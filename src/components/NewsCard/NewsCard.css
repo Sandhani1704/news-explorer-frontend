@@ -19,7 +19,15 @@
     padding-bottom: 52%;
     
   }
-  
+  .news-card__source-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    
+  }
   .news-card__image {
     display: block;
     width: 100%;
@@ -27,6 +35,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    
   }
   
   .news-card__tag {
@@ -99,6 +108,7 @@
   }
   
   .news-card__delete-button {
+    position: relative;
     margin-top: 24px;
     margin-right: 24px;
     width: 40px;
@@ -112,7 +122,10 @@
     border-radius: 8px;
     z-index: 1;
   }
-  
+  .news-card__delete-button:hover .news-card__button-tooltip {
+    visibility: visible;
+  }
+
   .news-card__delete-button:hover {
     background-image: url('../../images/garbage-icon-black.png');
   }
