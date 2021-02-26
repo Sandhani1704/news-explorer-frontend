@@ -14,8 +14,8 @@
 
 * Собрать проект в production: `npm run build`.
 
-[Ссылка на проект](https://news-explorer.students.nomoreparties.space/) 
+[Ссылка на проект](https://sandhani1704.github.io/news-explorer-frontend/)
 
-API: https://angalkina.students.nomoredomains.icu
+<!-- API: https://angalkina.students.nomoredomains.icu
 
-### Публичный IP-адрес: 84.201.139.63
+### Публичный IP-адрес: 84.201.139.63 -->
