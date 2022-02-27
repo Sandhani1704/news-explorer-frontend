@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 function NewsCard({ tagTitle, imageLink, imageAlt, date, title, description, source, sourceLink, loggedIn, keyword, handleArticleDelete, saveArticles, _id, findMySevedNews, article, myArticle, handleLoginPopupClick }) {
     const location = useLocation();
     const [saved, setSaved] = React.useState(false);
+    console.log(date)
 
     function handleFormatDate(date) {
         let now = new Date(date);
